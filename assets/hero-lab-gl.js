@@ -17,6 +17,35 @@ vec2 suv(){ return (gl_FragCoord.xy - .5*u_res)/u_res.y; }
 `;
 
 const S = {
+  // Cartly fusion: капли лави (35) з мʼяким фокусом, зерно мешу (27), засвіт плівки з правого краю (16), світна рамка вікна (51)
+  fusion: `float sdR(vec2 p, vec2 b, float r){ vec2 q=abs(p)-b+r; return length(max(q,0.))+min(max(q.x,q.y),0.)-r; }
+    void main(){ vec2 px=gl_FragCoord.xy; vec2 uv=px/u_res.y; float ar=u_res.x/u_res.y; float t=u_t*.22; float x=px.x/u_res.x;
+      // лава: 6 крапель у правій частині, повільні
+      float v=0.;
+      for(int i=0;i<6;i++){ float fi=float(i);
+        vec2 c=vec2(ar*(.7+.22*sin(t*.9+fi*1.7)), .42+.36*cos(t*.7+fi*2.3));
+        float r=.18+.06*sin(fi*1.3+t); v+=r*r/(dot(uv-c,uv-c)+.0005); }
+      if(u_mOn>.5){ vec2 m=u_m*vec2(ar,1.); v+=.012/(dot(uv-m,uv-m)+.0005); }
+      float blob=smoothstep(.75,1.45,v);              // мʼякий, розфокусований край
+      float core=smoothstep(1.9,5.,v);
+      vec3 col=u_bg;
+      col=mix(col, u_a, blob*.92);
+      col=mix(col, u_a*.82, core*.35);              // глибина в центрі краплі
+      // засвіт плівки праворуч
+      float leak=exp(-(1.-x)*4.2)*(.55+.45*fbm(vec2(px.y/u_res.y*2.,t*1.3)));
+      col=mix(col, u_s, clamp(leak,0.,1.)*.55);
+      // мʼякий мешевий відсвіт по всьому полю
+      col=mix(col, u_s, smoothstep(.6,.95,fbm(uv*1.2+t*.3))*(1.-blob)*.25);
+      // спокійна зона під заголовком
+      col=mix(u_bg, col, smoothstep(.18,.55,x)*.95+.05);
+      // світна рамка навколо вікна замовлень
+      if(u_rect.z>0.){ vec2 c=u_rect.xy+u_rect.zw*.5; vec2 b=u_rect.zw*.5; float d=sdR(px-c,b,16.); vec2 q=px-c; float a=atan(q.y,q.x);
+        float flow=.55+.45*sin(a*2.-u_t*1.4)+.25*sin(a*5.+u_t*2.1);
+        vec3 hue=mix(u_a,u_s,.5+.5*sin(a*3.+u_t*.8));
+        float glow=exp(-max(d,0.)/34.)*.75*flow+exp(-abs(d)/2.5)*.9;
+        col+=hue*glow*(1.-step(d,-1.)); }
+      gl_FragColor=vec4(col+grain()*.05,1.); }`,
+
   // Рідкий хром: подвійне спотворення шуму, смуги віддзеркалень і тонкий райдужний відлив
   chrome: `void main(){ vec2 uv=suv(); uv.x-=.25; float t=u_t*.12;
     vec2 q=vec2(fbm(uv*1.6+t), fbm(uv*1.6-t+5.2));

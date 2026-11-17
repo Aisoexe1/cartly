@@ -327,6 +327,11 @@ const V = [
     p: { bg: '#EDEDE8', ink: '#111111', accent: '#111111', accentInk: '#EDEDE8' } },
   { style: 'memphis', flat: 1, deco: 'memphis', id: 's-memphis', name: '69. Мемфіс', note: 'Дизайн 80-х: зигзаги, горох, трикутники, рожевий і бірюзовий',
     p: { bg: '#FFE8F2', ink: '#111111', accent: '#FF3E7F', accentInk: '#ffffff' } },
+  // ---- 70-71: збірка з улюблених (16 + 27 + 35 + 51) ----
+  { gl: 'fusion', id: 'cartly-day', name: '70. Cartly День', note: 'Збірка: бірюзова лава (35) + зерно мешу (27) + засвіт плівки (16) + світна рамка вікна (51)',
+    p: { bg: '#EAFBFF', surface: '#B8F6FF', ink: '#00384A', accent: '#00A6C8', accentInk: '#ffffff' } },
+  { gl: 'fusion', id: 'cartly-night', name: '71. Cartly Ніч', note: 'Та сама збірка в темній версії: бірюзова лава світиться в темряві',
+    p: { bg: '#04161C', surface: '#7FF3FF', ink: '#E6FCFF', accent: '#00B8D9', accentInk: '#04161C' } },
 ];
 
 
@@ -401,7 +406,7 @@ async function show(i) {
     if (v.deco) stage.insertAdjacentHTML('beforeend', DECO[v.deco]);
   } else if (v.gl) {
     const scrim = document.createElement('div');
-    current = mountGL(el, v.gl, v.p, v.gl === 'border' ? () => document.querySelector('.win')?.getBoundingClientRect() : null);
+    current = mountGL(el, v.gl, v.p, (v.gl === 'border' || v.gl === 'fusion') ? () => document.querySelector('.win')?.getBoundingClientRect() : null);
   } else if (v.custom) {
     const cv = document.createElement('canvas'); cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
     const scrim = document.createElement('div');
@@ -430,7 +435,8 @@ V.forEach((v, i) => {
   b.type = 'button'; b.textContent = v.name; b.onclick = () => show(i);
   bar.appendChild(b);
 });
-const start = Math.max(0, V.findIndex(v => '#' + v.id === location.hash));
+const fromHash = V.findIndex(v => '#' + v.id === location.hash);
+const start = fromHash >= 0 ? fromHash : V.findIndex(v => v.id === 'cartly-day');
 let cur = start; show(start);
 const go = i => { cur = (i + V.length) % V.length; show(cur); bar.children[cur].scrollIntoView({ inline: 'center', block: 'nearest' }); };
 [...bar.children].forEach((b, i) => b.addEventListener('click', () => { cur = i; }));
