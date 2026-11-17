@@ -29,10 +29,10 @@
 .btn.lg{height:48px;padding:0 22px;font-size:15px;border-radius:11px}
 .kbd{font:500 11px Inter;color:var(--mut);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;margin-left:4px}
 /* hero */
-.hero{text-align:center;padding:64px 0 0}
+.hero{text-align:center;padding:40px 0 0}
 .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);padding:5px 6px 5px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);text-decoration:none}
 .pill b{color:var(--ink);font-weight:500}.pill span{background:var(--sun-t);color:#9A6A00;border-radius:999px;padding:2px 9px;font-weight:600;font-size:12px}
-h1{font:600 clamp(44px,6vw,80px)/1.02 "Inter Tight";letter-spacing:-.045em;margin:22px auto 0;max-width:13ch;text-wrap:balance}
+h1{font:600 clamp(44px,5.6vw,76px)/1.02 "Inter Tight";letter-spacing:-.045em;margin:22px auto 0;max-width:15ch;text-wrap:balance}
 h1 .c{position:relative;white-space:nowrap}
 h1 .c::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height:.24em;background:var(--sun);opacity:.55;z-index:-1;border-radius:3px}
 .sub{font-size:19px;color:var(--mut);max-width:34em;margin:22px auto 30px;text-wrap:balance}
@@ -81,6 +81,39 @@ h1 .c::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height
 .bar{height:8px;border-radius:4px;background:var(--c);opacity:.85}
 .logos{display:flex;gap:28px;align-items:center;justify-content:center;margin:72px 0 0;color:var(--mut);font-size:13px;flex-wrap:wrap}
 .logos span{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:500}.logos img{height:18px}
+
+/* вітрина в герої */
+.niches{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line);margin-top:36px}
+.nb{font:500 14px Inter;border:0;background:none;padding:8px 14px;border-radius:9px;color:var(--mut);cursor:pointer;display:flex;align-items:center;gap:8px}
+.nb::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+.nb.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .08),0 0 0 1px var(--line)}
+.store{margin-top:22px;padding:0 70px 40px}
+.browser{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 30px 80px -30px rgb(24 24 27 / .28);text-align:left}
+.bbar{height:38px;display:flex;align-items:center;gap:7px;padding:0 14px;background:var(--soft);border-bottom:1px solid var(--line)}
+.bbar i{width:10px;height:10px;border-radius:50%;background:#DADADD}.bbar .url{margin:0 auto;font-size:12px;color:var(--mut);background:#fff;padding:4px 14px;border-radius:7px;box-shadow:inset 0 0 0 1px var(--line);min-width:280px;text-align:center}.bbar .url b{font-size:10px}
+.shop{--sa:var(--rose);transition:opacity .25s}.shop.fade{opacity:.25}
+.shead{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;font-size:13px;color:var(--mut)}.shead b{font:700 18px "Inter Tight";letter-spacing:.06em;color:var(--ink)}
+.cartb{color:var(--ink);font-weight:500}.cartb i{font-style:normal;background:var(--sa);color:#fff;border-radius:999px;padding:1px 7px;margin-left:4px;font-size:11px}
+.sban{margin:0 24px;height:230px;border-radius:12px;background:#ddd center/cover;display:flex;align-items:flex-end;padding:22px;color:#fff;position:relative;overflow:hidden}
+.sban::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(0 0 0 / .55),rgb(0 0 0 / 0) 60%)}
+.sban>div{position:relative;display:grid;gap:4px}.sban small{font-size:13px;opacity:.85}.sban strong{font:600 34px/1.05 "Inter Tight";letter-spacing:-.03em}
+.sbtn{justify-self:start;margin-top:10px;background:#fff;color:var(--ink);font-size:13px;font-weight:600;padding:8px 14px;border-radius:9px}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px 24px 24px;font-size:13px}
+.sgrid figure{margin:0}.sgrid img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:var(--soft)}
+.sgrid p{margin:8px 0 0;color:#3F3F46}.sgrid .pr{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-weight:600}
+.sgrid .add{width:26px;height:26px;border-radius:8px;background:var(--sa);color:#fff;display:grid;place-items:center;font-weight:600}
+.phone{position:absolute;right:0;bottom:0;width:230px;background:#fff;border-radius:30px;padding:9px;box-shadow:0 0 0 1px var(--line),0 30px 60px -20px rgb(24 24 27 / .35);text-align:left}
+.pscr{border-radius:22px;background:var(--soft);padding:14px 12px;display:grid;gap:8px;font-size:12px}
+.ph-top{font:600 14px "Inter Tight";text-align:center;margin-bottom:2px}
+.ph-item,.ph-field{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:8px}
+.ph-item img{width:44px;height:44px;border-radius:8px;object-fit:cover}.ph-item b{display:block;font-weight:600}.ph-item span{color:var(--mut)}
+.ph-field img{width:20px;height:20px}.ph-field small{display:block;color:var(--mut);font-size:11px}
+.ph-pay{background:var(--ink);color:#fff;text-align:center;border-radius:12px;padding:11px;font-weight:600}
+.toast{position:absolute;left:10px;top:150px;display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 0 0 1px var(--line),0 20px 40px -16px rgb(24 24 27 / .3);text-align:left;font-size:13px;animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
+.toast small{display:block;color:var(--mut)}.tic{width:32px;height:32px;border-radius:10px;background:var(--leaf);color:#fff;display:grid;place-items:center;font-weight:700}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}}
+@media (prefers-reduced-motion:reduce){.toast{animation:none}}
+@media (max-width:900px){.store{padding:0}.phone,.toast{display:none}.sgrid{grid-template-columns:repeat(2,1fr)}.niches{flex-wrap:wrap;justify-content:center}}
 footer{height:80px}
 @media (max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.row{grid-template-columns:18px 1fr 80px}.row .id,.row .lbl,.row .av{display:none}.bento{grid-template-columns:1fr}.tile.w2{grid-column:auto}.nav nav{display:none}}
 </style>
@@ -95,12 +128,41 @@ footer{height:80px}
 
   <section class="hero">
     <a class="pill" href="#"><b>Нове:</b> оплата частинами від monobank <span>Читати →</span></a>
-    <h1>Магазин, який <span class="c">працює сам</span></h1>
-    <p class="sub">Вітрина, оплата, Нова Пошта і CRM замовлень в одному місці. Ви продаєте, Cartly робить решту.</p>
+    <h1>Інтернет-магазин, який <span class="c">працює сам</span></h1>
+    <p class="sub">Створіть магазин одягу, кави чи автозапчастин за 5 хвилин. Оплата карткою, Нова Пошта і CRM уже всередині.</p>
     <div class="cta"><a class="btn dark lg" href="#">Створити магазин <span class="kbd" style="color:#bbb;border-color:#444">C</span></a><a class="btn ghost lg" href="#">Подивитись демо</a></div>
     <div class="dots"><span style="--c:var(--leaf)">7 днів безкоштовно</span><span style="--c:var(--tq)">0% комісії</span><span style="--c:var(--coral)">Старт за 5 хвилин</span></div>
 
-    <div class="stage">
+    <div class="niches" role="tablist" aria-label="Ніша магазину">
+      <button class="nb on" data-n="wear" style="--c:var(--rose)">Одяг</button><button class="nb" data-n="auto" style="--c:var(--sky)">Автозапчастини</button><button class="nb" data-n="beauty" style="--c:var(--leaf)">Косметика</button><button class="nb" data-n="coffee" style="--c:#E0A100">Кава</button>
+    </div>
+    <div class="stage store">
+      <div class="browser">
+        <div class="bbar"><i></i><i></i><i></i><span class="url"><b>🔒</b> <span id="s-domain">odiah.cartly.ua</span></span></div>
+        <div class="shop" id="shop">
+          <div class="shead"><b id="s-name">ODIAH</b><span id="s-menu">Жінкам · Чоловікам · Нове · Знижки</span><span class="cartb">Кошик <i id="s-cart">2</i></span></div>
+          <div class="sban" id="s-ban"><div><small id="s-kicker">Нова колекція</small><strong id="s-title">Осінь 2026</strong><span class="sbtn" id="s-cta">Дивитись →</span></div></div>
+          <div class="sgrid" id="s-grid"></div>
+        </div>
+      </div>
+      <div class="phone"><div class="pscr">
+        <div class="ph-top">Оформлення</div>
+        <div class="ph-item"><img id="p-img" alt=""><div><b id="p-name">Сорочка в смужку</b><span id="p-price">1 290 ₴</span></div></div>
+        <div class="ph-field"><img src="assets/icons/novaposhta.svg" alt=""><div><small>Доставка</small>Відділення №12, Київ</div></div>
+        <div class="ph-field"><img src="assets/icons/monobank.svg" alt=""><div><small>Оплата</small>monobank, частинами</div></div>
+        <div class="ph-pay" id="p-pay">Оплатити 1 290 ₴</div>
+      </div></div>
+      <div class="toast" id="toast"><span class="tic">₴</span><div><b>Нове замовлення <span id="t-id">#1042</span></b><small id="t-txt">Сорочка в смужку · 1 290 ₴ · ТТН створено</small></div></div>
+    </div>
+  </section>
+
+  <div class="logos">Підключено з першого дня:
+    <span><img src="assets/icons/novaposhta.svg" alt="">Нова Пошта</span><span><img src="assets/icons/monobank.svg" alt="">monobank</span><span><img src="assets/icons/liqpay.svg" alt="">LiqPay</span><span><img src="assets/icons/wayforpay.svg" alt="">WayForPay</span><span><img src="assets/icons/prom.svg" alt="">Prom</span></div>
+
+
+  <section class="sec2" style="padding-bottom:0">
+    <h2>А замовлення падають сюди. <span>Вже з ТТН і оплатою.</span></h2>
+    <div class="stage" style="margin-top:40px">
       <div class="app">
         <aside class="side">
           <div class="ws"><i></i>ODIAH <span class="kbd" style="margin-left:auto">⌘K</span></div>
@@ -128,10 +190,6 @@ footer{height:80px}
       </div>
     </div>
   </section>
-
-  <div class="logos">Підключено з першого дня:
-    <span><img src="assets/icons/novaposhta.svg" alt="">Нова Пошта</span><span><img src="assets/icons/monobank.svg" alt="">monobank</span><span><img src="assets/icons/liqpay.svg" alt="">LiqPay</span><span><img src="assets/icons/wayforpay.svg" alt="">WayForPay</span><span><img src="assets/icons/prom.svg" alt="">Prom</span></div>
-
   <section class="sec2">
     <h2>Усе для продажів. <span>Нічого зайвого.</span></h2>
     <div class="bento">
@@ -165,5 +223,40 @@ footer{height:80px}
   </section>
   <footer></footer>
 </div>
+<script>
+const U = id => `https://images.unsplash.com/photo-${id}?w=600&q=70&auto=format&fit=crop`;
+const N = {
+  wear:   { name:'ODIAH', dom:'odiah.cartly.ua', menu:'Жінкам · Чоловікам · Нове · Знижки', c:'var(--rose)', kicker:'Нова колекція', title:'Осінь 2026', cta:'Дивитись →', ban:'1489987707025-afc232f7ea0f',
+    items:[['1613461920867-9ea115fee900','Сорочка в смужку','1 290'],['1544441893-675973e31985','Кеди класичні','2 150'],['1479064555552-3ef4979f8908','Черевики шкіряні','3 400'],['1625698311031-f0dd15be5144','Поло біле','890']] },
+  auto:   { name:'ДЕТАЛЬ', dom:'detal.cartly.ua', menu:'Гальма · Ходова · Шини · Підбір за VIN', c:'var(--sky)', kicker:'Підбір за VIN за 1 хвилину', title:'Запчастини з доставкою завтра', cta:'Знайти деталь →', ban:'1760317890322-364a810cd4da',
+    items:[['1588017530244-c57df911f73b','Гальмівний диск','2 340'],['1696494561430-de087dd0bd69','Колодки передні','1 180'],['1656232976683-7b688560e427','Шина 205/55 R16','3 900'],['1682189165011-d4305d2b0ced','Диск колісний R17','5 200']] },
+  beauty: { name:'GLOW LAB', dom:'glowlab.cartly.ua', menu:'Обличчя · Тіло · Набори · Бестселери', c:'var(--leaf)', kicker:'Догляд, який працює', title:'Сироватки зі знижкою 20%', cta:'Обрати догляд →', ban:'1670201203208-055d6d79db4a',
+    items:[['1576426863848-c21f53c60b19','Сироватка з ретинолом','780'],['1616750819456-5cdee9b85d22','Крем для обличчя','540'],['1781344116880-029945a42b75','Олійка для обличчя','690'],['1597931752949-98c74b5b159f','Тонік зволожуючий','420']] },
+  coffee: { name:'ЗЕРНО', dom:'zerno.cartly.ua', menu:'Зерно · Мелена · Дріп · Подарунки', c:'#E0A100', kicker:'Обсмажуємо щопонеділка', title:'Свіжа кава з доставкою', cta:'До кави →', ban:'1524350876685-274059332603',
+    items:[['1559056199-641a0ac8b55e','Колумбія, 250 г','320'],['1512372388054-a322888e67a6','Ефіопія, 250 г','360'],['1642437271884-fe1d3393eef9','Бразилія, 250 г','290'],['1562051036-e0eea191d42f','Еспресо-суміш, 1 кг','980']] },
+};
+let oid = 1042;
+function setNiche(k){
+  const d = N[k], shop = document.getElementById('shop');
+  document.querySelectorAll('.nb').forEach(b => b.classList.toggle('on', b.dataset.n === k));
+  shop.classList.add('fade');
+  setTimeout(() => {
+    shop.style.setProperty('--sa', d.c);
+    for (const [id, v] of [['s-name',d.name],['s-domain',d.dom],['s-menu',d.menu],['s-kicker',d.kicker],['s-title',d.title],['s-cta',d.cta]]) document.getElementById(id).textContent = v;
+    document.getElementById('s-ban').style.backgroundImage = `url(${U(d.ban).replace('w=600','w=1400')})`;
+    document.getElementById('s-grid').innerHTML = d.items.map(([img,n,p]) => `<figure><img src="${U(img)}" alt="${n}" loading="lazy"><p>${n}</p><div class="pr"><span>${p} ₴</span><span class="add">+</span></div></figure>`).join('');
+    const [img, n, p] = d.items[0];
+    document.getElementById('p-img').src = U(img); document.getElementById('p-name').textContent = n; document.getElementById('p-price').textContent = p + ' ₴';
+    document.getElementById('p-pay').textContent = 'Оплатити ' + p + ' ₴'; document.getElementById('p-pay').style.background = d.c;
+    const t = document.getElementById('toast'); t.style.animation = 'none'; t.offsetHeight; t.style.animation = '';
+    document.getElementById('t-id').textContent = '#' + (++oid); document.getElementById('t-txt').textContent = `${n} · ${p} ₴ · ТТН створено`;
+    shop.classList.remove('fade');
+  }, 180);
+}
+document.querySelectorAll('.nb').forEach(b => b.addEventListener('click', () => { setNiche(b.dataset.n); auto = false; }));
+let auto = !matchMedia('(prefers-reduced-motion: reduce)').matches, order = ['wear','auto','beauty','coffee'], k = 0;
+setNiche('wear');
+setInterval(() => { if (auto && document.visibilityState === 'visible') setNiche(order[++k % 4]); }, 5000);
+</script>
 </body>
 </html>
