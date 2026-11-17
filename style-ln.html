@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartly: Linear × Notion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Linear: точна типографіка, продукт у центрі, дрібні деталі (шорткати, іконки статусів, тонкі лінії).
+   Notion: світлий теплий фон, дружні кольорові тайли. Плюс шість насичених кольорів, кожен зі своєю роллю. */
+:root{
+  --bg:#FFFFFF; --soft:#F7F7F5; --ink:#18181B; --mut:#6B6B70; --line:#ECECEE;
+  --tq:#00A6C8; --coral:#FF6B4A; --sun:#FFC23D; --leaf:#22A86A; --sky:#3D7BFF; --rose:#F0508C;
+  --tq-t:#E2F6FA; --coral-t:#FFEDE8; --sun-t:#FFF5DB; --leaf-t:#E4F6EC; --sky-t:#E8EFFF; --rose-t:#FDE8F0;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:9px;font:600 18px "Inter Tight";letter-spacing:-.02em}
+.logo i{width:22px;height:22px;border-radius:6px;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px;background:var(--ink)}
+.logo i b{border-radius:2px}.logo i b:nth-child(1){background:var(--tq)}.logo i b:nth-child(2){background:var(--coral)}.logo i b:nth-child(3){background:var(--sun)}.logo i b:nth-child(4){background:var(--leaf)}
+.nav nav{display:flex;gap:26px;font-size:14px;color:var(--mut)}.nav nav a{color:inherit;text-decoration:none}.nav nav a:hover{color:var(--ink)}
+.nav .r{display:flex;gap:10px;align-items:center;font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:9px;font:500 14px Inter;text-decoration:none;cursor:pointer;transition:transform .15s,background .15s,box-shadow .15s}
+.btn.dark{background:var(--ink);color:#fff}.btn.dark:hover{background:#000;transform:translateY(-1px)}
+.btn.ghost{color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}.btn.ghost:hover{background:var(--soft)}
+.btn.lg{height:48px;padding:0 22px;font-size:15px;border-radius:11px}
+.kbd{font:500 11px Inter;color:var(--mut);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;margin-left:4px}
+/* hero */
+.hero{text-align:center;padding:64px 0 0}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);padding:5px 6px 5px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);text-decoration:none}
+.pill b{color:var(--ink);font-weight:500}.pill span{background:var(--sun-t);color:#9A6A00;border-radius:999px;padding:2px 9px;font-weight:600;font-size:12px}
+h1{font:600 clamp(44px,6vw,80px)/1.02 "Inter Tight";letter-spacing:-.045em;margin:22px auto 0;max-width:13ch;text-wrap:balance}
+h1 .c{position:relative;white-space:nowrap}
+h1 .c::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height:.24em;background:var(--sun);opacity:.55;z-index:-1;border-radius:3px}
+.sub{font-size:19px;color:var(--mut);max-width:34em;margin:22px auto 30px;text-wrap:balance}
+.cta{display:flex;gap:10px;justify-content:center}
+.dots{display:flex;gap:18px;justify-content:center;margin-top:22px;font-size:13px;color:var(--mut)}.dots span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:var(--c)}
+/* app */
+.stage{position:relative;margin:56px auto 0;max-width:1120px}
+.stage::before{content:"";position:absolute;inset:40px -40px -30px;background:
+  radial-gradient(40% 50% at 15% 30%,rgb(0 166 200 / .18),transparent 70%),radial-gradient(35% 45% at 85% 25%,rgb(255 107 74 / .16),transparent 70%),radial-gradient(40% 50% at 55% 90%,rgb(255 194 61 / .2),transparent 70%);filter:blur(10px);z-index:-1}
+.app{background:#fff;border-radius:14px;box-shadow:0 0 0 1px var(--line),0 30px 80px -30px rgb(24 24 27 / .25);display:grid;grid-template-columns:220px 1fr;overflow:hidden;text-align:left;font-size:13px}
+.side{background:var(--soft);border-right:1px solid var(--line);padding:12px 10px;display:grid;gap:2px;align-content:start}
+.side .ws{display:flex;align-items:center;gap:8px;padding:6px 8px 12px;font-weight:600}
+.side .ws i{width:20px;height:20px;border-radius:5px;background:var(--coral)}
+.side .it{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:7px;color:#3F3F46}.side .it.on{background:#fff;box-shadow:0 0 0 1px var(--line);color:var(--ink);font-weight:500}
+.side .it em{margin-left:auto;font-style:normal;color:var(--mut);font-size:12px}
+.side .sec{margin:14px 8px 4px;font-size:11px;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+.ic{width:16px;height:16px;border-radius:4px;flex:none;display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff}
+.main{display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:10px;height:46px;padding:0 16px;border-bottom:1px solid var(--line)}
+.top b{font-weight:600}.top .sp{flex:1}.top .chip{font-size:12px;padding:3px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);color:#3F3F46}
+.grp{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#FCFCFC;border-bottom:1px solid var(--line);font-weight:500;color:#3F3F46}
+.grp em{font-style:normal;color:var(--mut);font-weight:400}
+.row{display:grid;grid-template-columns:18px 64px 1fr 150px 92px 70px;gap:12px;align-items:center;padding:9px 16px;border-bottom:1px solid #F3F3F4}
+.row:hover{background:#FAFAFA}
+.st{width:14px;height:14px;border-radius:50%;border:2px solid var(--c);position:relative}
+.st.half::after{content:"";position:absolute;inset:2px;border-radius:50%;background:conic-gradient(var(--c) 0 50%,transparent 0)}
+.st.done{background:var(--c)}.st.done::after{content:"";position:absolute;left:3px;top:1px;width:3px;height:6px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(40deg)}
+.id{color:var(--mut);font-variant-numeric:tabular-nums}.ttl{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbl{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#3F3F46;padding:2px 8px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);justify-self:start}
+.lbl::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.sum{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.av{width:22px;height:22px;border-radius:50%;justify-self:end;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff;background:var(--c)}
+/* bento */
+.sec2{padding:120px 0 40px}
+.sec2 h2{font:600 clamp(32px,3.6vw,48px)/1.08 "Inter Tight";letter-spacing:-.035em;margin:0;max-width:18ch}
+.sec2 h2 span{color:var(--mut)}
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.tile{border-radius:18px;padding:22px;min-height:280px;display:flex;flex-direction:column;gap:10px;background:var(--t);transition:transform .2s}
+.tile:hover{transform:translateY(-2px)}
+.tile .h{display:flex;align-items:center;gap:10px;font:600 17px "Inter Tight";letter-spacing:-.01em}
+.tile .h i{width:30px;height:30px;border-radius:9px;background:var(--c);display:grid;place-items:center;color:#fff;font-style:normal;font-size:15px}
+.tile p{margin:0;color:#3F3F46;font-size:14px}
+.tile .ui{margin-top:auto;background:#fff;border-radius:12px;box-shadow:0 0 0 1px rgb(0 0 0 / .05),0 10px 24px -14px rgb(0 0 0 / .2);padding:12px;font-size:12px}
+.tile.w2{grid-column:span 2}
+.ln{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid #F1F1F2}.ln:first-child{border-top:0}
+.bar{height:8px;border-radius:4px;background:var(--c);opacity:.85}
+.logos{display:flex;gap:28px;align-items:center;justify-content:center;margin:72px 0 0;color:var(--mut);font-size:13px;flex-wrap:wrap}
+.logos span{display:flex;gap:8px;align-items:center;color:var(--ink);font-weight:500}.logos img{height:18px}
+footer{height:80px}
+@media (max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.row{grid-template-columns:18px 1fr 80px}.row .id,.row .lbl,.row .av{display:none}.bento{grid-template-columns:1fr}.tile.w2{grid-column:auto}.nav nav{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <div class="logo"><i><b></b><b></b><b></b><b></b></i>Cartly</div>
+    <nav><a href="#">Продукт</a><a href="#">Шаблони</a><a href="#">Тарифи</a><a href="#">Інтеграції</a><a href="#">Блог</a></nav>
+    <div class="r"><a class="btn ghost" href="#">Увійти</a><a class="btn dark" href="#">Почати безкоштовно</a></div>
+  </div>
+
+  <section class="hero">
+    <a class="pill" href="#"><b>Нове:</b> оплата частинами від monobank <span>Читати →</span></a>
+    <h1>Магазин, який <span class="c">працює сам</span></h1>
+    <p class="sub">Вітрина, оплата, Нова Пошта і CRM замовлень в одному місці. Ви продаєте, Cartly робить решту.</p>
+    <div class="cta"><a class="btn dark lg" href="#">Створити магазин <span class="kbd" style="color:#bbb;border-color:#444">C</span></a><a class="btn ghost lg" href="#">Подивитись демо</a></div>
+    <div class="dots"><span style="--c:var(--leaf)">7 днів безкоштовно</span><span style="--c:var(--tq)">0% комісії</span><span style="--c:var(--coral)">Старт за 5 хвилин</span></div>
+
+    <div class="stage">
+      <div class="app">
+        <aside class="side">
+          <div class="ws"><i></i>ODIAH <span class="kbd" style="margin-left:auto">⌘K</span></div>
+          <div class="it on"><span class="ic" style="background:var(--tq)">◎</span>Замовлення<em>24</em></div>
+          <div class="it"><span class="ic" style="background:var(--coral)">▦</span>Товари<em>312</em></div>
+          <div class="it"><span class="ic" style="background:var(--sky)">●</span>Клієнти</div>
+          <div class="it"><span class="ic" style="background:var(--sun)">▤</span>Склад</div>
+          <div class="it"><span class="ic" style="background:var(--leaf)">↗</span>Аналітика</div>
+          <div class="sec">Канали</div>
+          <div class="it"><span class="ic" style="background:var(--ink)">◱</span>Вітрина</div>
+          <div class="it"><img src="assets/icons/prom.svg" width="16" height="16" alt="">Prom<em>фід</em></div>
+          <div class="it"><img src="assets/icons/novaposhta.svg" width="16" height="16" alt="">Нова Пошта</div>
+        </aside>
+        <div class="main">
+          <div class="top"><b>Замовлення</b><span class="chip">Усі</span><span class="chip">Мої</span><span class="chip">Сьогодні</span><span class="sp"></span><span class="chip">Фільтр</span><span class="chip">+ Нове <span class="kbd">N</span></span></div>
+          <div class="grp"><span class="st" style="--c:var(--sky)"></span>Нові <em>3</em></div>
+          <div class="row"><span class="st" style="--c:var(--sky)"></span><span class="id">#1042</span><span class="ttl">Олена Ткачук · Сорочка в смужку, M</span><span class="lbl" style="--c:var(--rose)">Одяг</span><span class="sum">1 290 ₴</span><span class="av" style="--c:var(--rose)">ОТ</span></div>
+          <div class="row"><span class="st" style="--c:var(--sky)"></span><span class="id">#1041</span><span class="ttl">Тарас Коваль · Гальмівний диск, передній</span><span class="lbl" style="--c:var(--sky)">Автозапчастини</span><span class="sum">2 340 ₴</span><span class="av" style="--c:var(--sky)">ТК</span></div>
+          <div class="grp"><span class="st half" style="--c:var(--sun)"></span>Пакуємо <em>2</em></div>
+          <div class="row"><span class="st half" style="--c:var(--sun)"></span><span class="id">#1039</span><span class="ttl">Богдан Сидоренко · Кеди класичні, 42</span><span class="lbl" style="--c:var(--coral)">Взуття</span><span class="sum">2 150 ₴</span><span class="av" style="--c:var(--coral)">БС</span></div>
+          <div class="row"><span class="st half" style="--c:var(--sun)"></span><span class="id">#1038</span><span class="ttl">Марія Гончар · Сироватка з ретинолом</span><span class="lbl" style="--c:var(--leaf)">Косметика</span><span class="sum">780 ₴</span><span class="av" style="--c:var(--leaf)">МГ</span></div>
+          <div class="grp"><span class="st done" style="--c:var(--leaf)"></span>Відправлено <em>19</em></div>
+          <div class="row"><span class="st done" style="--c:var(--leaf)"></span><span class="id">#1035</span><span class="ttl">Ірина Лагода · Кава в зернах, 250 г × 3</span><span class="lbl" style="--c:var(--sun)">Кава</span><span class="sum">960 ₴</span><span class="av" style="--c:var(--sun)">ІЛ</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="logos">Підключено з першого дня:
+    <span><img src="assets/icons/novaposhta.svg" alt="">Нова Пошта</span><span><img src="assets/icons/monobank.svg" alt="">monobank</span><span><img src="assets/icons/liqpay.svg" alt="">LiqPay</span><span><img src="assets/icons/wayforpay.svg" alt="">WayForPay</span><span><img src="assets/icons/prom.svg" alt="">Prom</span></div>
+
+  <section class="sec2">
+    <h2>Усе для продажів. <span>Нічого зайвого.</span></h2>
+    <div class="bento">
+      <div class="tile w2" style="--t:var(--tq-t);--c:var(--tq)">
+        <div class="h"><i>◱</i>Вітрина за 5 хвилин</div><p>Оберіть шаблон під нішу, додайте товари з Excel або Prom, і магазин уже на вашому домені.</p>
+        <div class="ui" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <div style="height:70px;border-radius:8px;background:var(--rose-t)"></div><div style="height:70px;border-radius:8px;background:var(--sun-t)"></div><div style="height:70px;border-radius:8px;background:var(--sky-t)"></div><div style="height:70px;border-radius:8px;background:var(--leaf-t)"></div>
+          <span>Сорочка · 1 290 ₴</span><span>Кава · 320 ₴</span><span>Диск · 2 340 ₴</span><span>Сироватка · 780 ₴</span></div>
+      </div>
+      <div class="tile" style="--t:var(--coral-t);--c:var(--coral)">
+        <div class="h"><i>₴</i>Оплата карткою</div><p>monobank, LiqPay, WayForPay. Гроші одразу на ваш рахунок.</p>
+        <div class="ui"><div class="ln"><span>Оплачено</span><b>2 150 ₴</b></div><div class="ln"><span>Частинами, 4 платежі</span><b>537 ₴</b></div><div class="ln"><span>Комісія Cartly</span><b style="color:var(--leaf)">0 ₴</b></div></div>
+      </div>
+      <div class="tile" style="--t:var(--sun-t);--c:#E0A100">
+        <div class="h"><i>✓</i>Нова Пошта</div><p>ТТН створюється сама, статуси оновлюються без вас.</p>
+        <div class="ui"><div class="ln"><span>20 4508 3317 2209</span><b style="color:var(--leaf)">Отримано</b></div><div class="ln"><span>20 4508 3318 0064</span><b style="color:#B98500">В дорозі</b></div><div class="ln"><span>20 4508 3318 4120</span><b style="color:var(--sky)">Створено</b></div></div>
+      </div>
+      <div class="tile" style="--t:var(--leaf-t);--c:var(--leaf)">
+        <div class="h"><i>↗</i>Аналітика</div><p>Що продається, звідки клієнти, скільки заробили за тиждень.</p>
+        <div class="ui"><div style="display:flex;align-items:flex-end;gap:6px;height:70px"><div class="bar" style="height:30%"></div><div class="bar" style="height:46%;flex:1"></div><div class="bar" style="height:38%;flex:1"></div><div class="bar" style="height:62%;flex:1"></div><div class="bar" style="height:55%;flex:1"></div><div class="bar" style="height:80%;flex:1"></div><div class="bar" style="height:100%;flex:1"></div></div><div class="ln" style="margin-top:8px"><span>Тиждень</span><b>84 320 ₴</b></div></div>
+      </div>
+      <div class="tile" style="--t:var(--sky-t);--c:var(--sky)">
+        <div class="h"><i>●</i>CRM клієнтів</div><p>Історія покупок, нотатки, повторні продажі.</p>
+        <div class="ui"><div class="ln"><span>Олена Ткачук</span><b>6 замовлень</b></div><div class="ln"><span>Тарас Коваль</span><b>3 замовлення</b></div><div class="ln"><span>Ірина Лагода</span><b>Постійна</b></div></div>
+      </div>
+      <div class="tile" style="--t:var(--rose-t);--c:var(--rose);grid-column:1 / -1;min-height:0">
+        <div class="h"><i>▤</i>Склад і фіди</div><p>Залишки списуються самі, товари їдуть на Prom і Rozetka.</p>
+        <div class="ui"><div class="ln"><span>Кеди, 42</span><b>4 шт</b></div><div class="ln"><span>Сорочка, M</span><b style="color:var(--coral)">1 шт</b></div><div class="ln"><span>Фід Prom</span><b style="color:var(--leaf)">Оновлено</b></div></div>
+      </div>
+    </div>
+  </section>
+  <footer></footer>
+</div>
+</body>
+</html>
