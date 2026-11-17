@@ -114,6 +114,12 @@ h1 .c::after{content:"";position:absolute;left:-2%;right:-2%;bottom:.08em;height
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}}
 @media (prefers-reduced-motion:reduce){.toast{animation:none}}
 @media (max-width:900px){.store{padding:0}.phone,.toast{display:none}.sgrid{grid-template-columns:repeat(2,1fr)}.niches{flex-wrap:wrap;justify-content:center}}
+
+.prod{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line);margin-bottom:22px}
+.pb{font:500 14px Inter;border:0;background:none;padding:7px 16px;border-radius:999px;color:var(--mut);cursor:pointer}
+.pb.on{background:var(--ink);color:#fff}
+body:not(.crm) .m-crm{display:none!important} body.crm .m-shop{display:none!important}
+.m-shop>.pill,.m-crm>.pill{margin:0 auto}
 footer{height:80px}
 @media (max-width:900px){.app{grid-template-columns:1fr}.side{display:none}.row{grid-template-columns:18px 1fr 80px}.row .id,.row .lbl,.row .av{display:none}.bento{grid-template-columns:1fr}.tile.w2{grid-column:auto}.nav nav{display:none}}
 </style>
@@ -127,12 +133,16 @@ footer{height:80px}
   </div>
 
   <section class="hero">
-    <a class="pill" href="#"><b>Нове:</b> оплата частинами від monobank <span>Читати →</span></a>
-    <h1>Інтернет-магазин, який <span class="c">працює сам</span></h1>
-    <p class="sub">Створіть магазин одягу, кави чи автозапчастин за 5 хвилин. Оплата карткою, Нова Пошта і CRM уже всередині.</p>
-    <div class="cta"><a class="btn dark lg" href="#">Створити магазин <span class="kbd" style="color:#bbb;border-color:#444">C</span></a><a class="btn ghost lg" href="#">Подивитись демо</a></div>
+    <div class="prod" role="tablist" aria-label="Продукт"><button class="pb on" data-m="shop">Інтернет-магазин</button><button class="pb" data-m="crm">CRM для продавців</button></div>
+    <div class="m-shop"><a class="pill" href="#"><b>Нове:</b> оплата частинами від monobank <span>Читати →</span></a></div>
+    <div class="m-crm"><a class="pill" href="#"><b>Для Prom, Rozetka, Instagram</b> замовлення з усіх каналів в одному місці <span>Як це →</span></a></div>
+    <h1 class="m-shop">Інтернет-магазин, який <span class="c">працює сам</span></h1><h1 class="m-crm">CRM, яка <span class="c">збирає замовлення</span> з усіх каналів</h1>
+    <p class="sub m-shop">Створіть магазин одягу, кави чи автозапчастин за 5 хвилин. Оплата карткою, Нова Пошта і CRM уже всередині.</p><p class="sub m-crm">Продаєте на Prom, Rozetka, в Instagram чи на своєму сайті? Замовлення, клієнти, ТТН Нової Пошти і склад в одному кабінеті. Від 400 ₴ на місяць.</p>
+    <div class="cta m-shop"><a class="btn dark lg" href="#">Створити магазин <span class="kbd" style="color:#bbb;border-color:#444">C</span></a><a class="btn ghost lg" href="#">Подивитись демо</a></div>
+    <div class="cta m-crm"><a class="btn dark lg" href="#">Підключити CRM</a><a class="btn ghost lg" href="#">Подивитись демо</a></div>
     <div class="dots"><span style="--c:var(--leaf)">7 днів безкоштовно</span><span style="--c:var(--tq)">0% комісії</span><span style="--c:var(--coral)">Старт за 5 хвилин</span></div>
 
+    <div class="m-shop">
     <div class="niches" role="tablist" aria-label="Ніша магазину">
       <button class="nb on" data-n="wear" style="--c:var(--rose)">Одяг</button><button class="nb" data-n="auto" style="--c:var(--sky)">Автозапчастини</button><button class="nb" data-n="beauty" style="--c:var(--leaf)">Косметика</button><button class="nb" data-n="coffee" style="--c:#E0A100">Кава</button>
     </div>
@@ -153,6 +163,34 @@ footer{height:80px}
         <div class="ph-pay" id="p-pay">Оплатити 1 290 ₴</div>
       </div></div>
       <div class="toast" id="toast"><span class="tic">₴</span><div><b>Нове замовлення <span id="t-id">#1042</span></b><small id="t-txt">Сорочка в смужку · 1 290 ₴ · ТТН створено</small></div></div>
+    </div>
+    </div>
+    <div class="stage crm-hero m-crm" style="margin-top:48px">
+      <div class="app">
+        <aside class="side">
+          <div class="ws"><i></i>ODIAH <span class="kbd" style="margin-left:auto">⌘K</span></div>
+          <div class="it on"><span class="ic" style="background:var(--tq)">◎</span>Замовлення<em>24</em></div>
+          <div class="it"><span class="ic" style="background:var(--coral)">▦</span>Товари<em>312</em></div>
+          <div class="it"><span class="ic" style="background:var(--sky)">●</span>Клієнти</div>
+          <div class="it"><span class="ic" style="background:var(--sun)">▤</span>Склад</div>
+          <div class="it"><span class="ic" style="background:var(--leaf)">↗</span>Аналітика</div>
+          <div class="sec">Канали</div>
+          <div class="it"><span class="ic" style="background:var(--ink)">◱</span>Вітрина</div>
+          <div class="it"><img src="assets/icons/prom.svg" width="16" height="16" alt="">Prom<em>фід</em></div>
+          <div class="it"><img src="assets/icons/novaposhta.svg" width="16" height="16" alt="">Нова Пошта</div>
+        </aside>
+        <div class="main">
+          <div class="top"><b>Замовлення</b><span class="chip">Усі</span><span class="chip">Мої</span><span class="chip">Сьогодні</span><span class="sp"></span><span class="chip">Фільтр</span><span class="chip">+ Нове <span class="kbd">N</span></span></div>
+          <div class="grp"><span class="st" style="--c:var(--sky)"></span>Нові <em>3</em></div>
+          <div class="row"><span class="st" style="--c:var(--sky)"></span><span class="id">#1042</span><span class="ttl">Олена Ткачук · Сорочка в смужку, M</span><span class="lbl" style="--c:var(--rose)">Одяг</span><span class="sum">1 290 ₴</span><span class="av" style="--c:var(--rose)">ОТ</span></div>
+          <div class="row"><span class="st" style="--c:var(--sky)"></span><span class="id">#1041</span><span class="ttl">Тарас Коваль · Гальмівний диск, передній</span><span class="lbl" style="--c:var(--sky)">Автозапчастини</span><span class="sum">2 340 ₴</span><span class="av" style="--c:var(--sky)">ТК</span></div>
+          <div class="grp"><span class="st half" style="--c:var(--sun)"></span>Пакуємо <em>2</em></div>
+          <div class="row"><span class="st half" style="--c:var(--sun)"></span><span class="id">#1039</span><span class="ttl">Богдан Сидоренко · Кеди класичні, 42</span><span class="lbl" style="--c:var(--coral)">Взуття</span><span class="sum">2 150 ₴</span><span class="av" style="--c:var(--coral)">БС</span></div>
+          <div class="row"><span class="st half" style="--c:var(--sun)"></span><span class="id">#1038</span><span class="ttl">Марія Гончар · Сироватка з ретинолом</span><span class="lbl" style="--c:var(--leaf)">Косметика</span><span class="sum">780 ₴</span><span class="av" style="--c:var(--leaf)">МГ</span></div>
+          <div class="grp"><span class="st done" style="--c:var(--leaf)"></span>Відправлено <em>19</em></div>
+          <div class="row"><span class="st done" style="--c:var(--leaf)"></span><span class="id">#1035</span><span class="ttl">Ірина Лагода · Кава в зернах, 250 г × 3</span><span class="lbl" style="--c:var(--sun)">Кава</span><span class="sum">960 ₴</span><span class="av" style="--c:var(--sun)">ІЛ</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -256,6 +294,8 @@ function setNiche(k){
 document.querySelectorAll('.nb').forEach(b => b.addEventListener('click', () => { setNiche(b.dataset.n); auto = false; }));
 let auto = !matchMedia('(prefers-reduced-motion: reduce)').matches, order = ['wear','auto','beauty','coffee'], k = 0;
 setNiche('wear');
+document.querySelectorAll('.pb').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.pb').forEach(x => x.classList.toggle('on', x === b)); document.body.classList.toggle('crm', b.dataset.m === 'crm'); try { history.replaceState(null, '', b.dataset.m === 'crm' ? '#crm' : '#'); } catch {} }));
+if (location.hash === '#crm') document.querySelector('.pb[data-m=crm]').click();
 setInterval(() => { if (auto && document.visibilityState === 'visible') setNiche(order[++k % 4]); }, 5000);
 </script>
 </body>
