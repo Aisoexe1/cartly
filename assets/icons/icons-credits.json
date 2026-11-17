@@ -1,0 +1,59 @@
+[
+  {
+    "file": "xlsx.svg",
+    "icon": "file:file-type-excel",
+    "name": "Excel workbook",
+    "kind": "colour",
+    "source": "@iconify-json/vscode-icons@1.2.30",
+    "author": "Roberto Huertas",
+    "licence": "MIT",
+    "url": "https://github.com/vscode-icons/vscode-icons",
+    "trademark": false
+  },
+  {
+    "file": "xml.svg",
+    "icon": "file:file-type-xml",
+    "name": "XML",
+    "kind": "colour",
+    "source": "@iconify-json/vscode-icons@1.2.30",
+    "author": "Roberto Huertas",
+    "licence": "MIT",
+    "url": "https://github.com/vscode-icons/vscode-icons",
+    "trademark": false
+  },
+  {
+    "file": "novaposhta.svg",
+    "name": "Нова Пошта",
+    "kind": "colour",
+    "source": "https://novaposhta.ua/_np-app-static/favicon.svg",
+    "trademark": true
+  },
+  {
+    "file": "prom.svg",
+    "name": "Prom.ua",
+    "kind": "colour",
+    "source": "https://prom.ua (favicon)",
+    "trademark": true
+  },
+  {
+    "file": "monobank.svg",
+    "name": "monobank",
+    "kind": "colour",
+    "source": "https://www.monobank.ua (app icon PNG)",
+    "trademark": true
+  },
+  {
+    "file": "liqpay.svg",
+    "name": "LiqPay",
+    "kind": "colour",
+    "source": "https://www.liqpay.ua/logo_liqpay_white_color.svg (символ)",
+    "trademark": true
+  },
+  {
+    "file": "wayforpay.svg",
+    "name": "WayForPay",
+    "kind": "colour",
+    "source": "замок з логотипа wayforpay.com, перемальований вектором",
+    "trademark": true
+  }
+]
