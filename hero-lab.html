@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cartly: варіанти першого екрана</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400..700&family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700&family=Jost:wght@400;700;900&family=Inter+Tight:wght@500;800;900&family=Instrument+Serif:ital@0;1&family=Syne:wght@700;800&family=Oswald:wght@500;700&family=Unbounded:wght@600;900&family=Noto+Serif:wght@300;400&family=VT323&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root { --bg:#F3F4FF; --ink:#0D1A7A; --accent:#1F3BFF; --accent-ink:#fff; --card:#ffffff; --card-ink:#14161b; }
 * { box-sizing: border-box; }
@@ -44,6 +44,112 @@ h1 { margin: 0; font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-s
 .np { margin: 14px 16px 16px; padding: 14px; border-radius: 12px; background: #f6f7f9; display: flex; align-items: center; gap: 12px; }
 .np .ic { width: 22px; height: 22px; border-radius: 50%; background: #1f9d55; color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
 .label { position: absolute; left: clamp(20px, 5vw, 80px); bottom: 92px; font-size: 13px; opacity: .7; }
+
+/* ===== стилі (54+) ===== */
+.hero[data-style] .stage .deco { position:absolute; inset:0; pointer-events:none; }
+/* Швейцарський брутальний друк */
+.hero[data-style="swiss-brutal"] { font-family:"JetBrains Mono",monospace; }
+.hero[data-style="swiss-brutal"] h1 { font-family:"Archivo Black",sans-serif; text-transform:uppercase; letter-spacing:-.05em; line-height:.86; font-size:clamp(46px,6.4vw,104px); }
+.hero[data-style="swiss-brutal"] :is(.notice,.facts,.nav,.lead) { text-transform:uppercase; letter-spacing:.06em; font-size:13px; }
+.hero[data-style="swiss-brutal"] .btns a, .hero[data-style="swiss-brutal"] .nav .cta { border-radius:0; border:2px solid var(--ink); text-transform:uppercase; font-family:"JetBrains Mono"; letter-spacing:.06em; }
+.hero[data-style="swiss-brutal"] .b2 { backdrop-filter:none; background:transparent; }
+.hero[data-style="swiss-brutal"] .win { border-radius:0; box-shadow:none; border:2px solid var(--ink); font-family:"JetBrains Mono"; }
+.hero[data-style="swiss-brutal"] .win .st, .hero[data-style="swiss-brutal"] .np { border-radius:0; }
+/* Тактичний термінал */
+.hero[data-style="terminal"] { font-family:"JetBrains Mono",monospace; }
+.hero[data-style="terminal"] h1 { font-family:"JetBrains Mono"; font-weight:700; text-transform:uppercase; letter-spacing:-.02em; font-size:clamp(36px,4.6vw,70px); }
+.hero[data-style="terminal"] h1::before { content:"> "; color:var(--accent); }
+.hero[data-style="terminal"] :is(.notice,.facts,.nav) { text-transform:uppercase; letter-spacing:.1em; font-size:12px; }
+.hero[data-style="terminal"] .btns a, .hero[data-style="terminal"] .nav .cta { border-radius:0; text-transform:uppercase; letter-spacing:.08em; }
+.hero[data-style="terminal"] .b1::before { content:"[ "; } .hero[data-style="terminal"] .b1::after { content:" ]"; }
+.hero[data-style="terminal"] .win { border-radius:0; background:#0f0f0f; color:#eaeaea; border:1px solid #333; box-shadow:none; font-family:"JetBrains Mono"; }
+.hero[data-style="terminal"] .win .top, .hero[data-style="terminal"] .win .row { border-color:#262626; color:#9a9a9a; } .hero[data-style="terminal"] .win .who, .hero[data-style="terminal"] .win .top b { color:#eaeaea !important; }
+.hero[data-style="terminal"] .win .av { background:#1d1d1d; color:#eaeaea; border-radius:0; } .hero[data-style="terminal"] .win .st { border-radius:0; background:transparent; border:1px solid currentColor; }
+.hero[data-style="terminal"] .np { background:#161616; border-radius:0; color:#4AF626; } .hero[data-style="terminal"] .np .ic { background:#4AF626; color:#0a0a0a; border-radius:0; }
+.hero[data-style="terminal"]::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg, rgb(255 255 255 / .03) 0 1px, transparent 1px 3px); }
+/* Необруталізм */
+.hero[data-style="neo-brutal"] { font-family:"Space Grotesk",sans-serif; }
+.hero[data-style="neo-brutal"] h1 { font-weight:700; letter-spacing:-.04em; }
+.hero[data-style="neo-brutal"] .btns a, .hero[data-style="neo-brutal"] .nav .cta { border:3px solid #111; border-radius:12px; box-shadow:5px 5px 0 #111; font-weight:700; color:#111; transition:transform .12s, box-shadow .12s; }
+.hero[data-style="neo-brutal"] .btns a:hover { transform:translate(2px,2px); box-shadow:3px 3px 0 #111; }
+.hero[data-style="neo-brutal"] .b2 { background:#fff; backdrop-filter:none; }
+.hero[data-style="neo-brutal"] .win { border:3px solid #111; border-radius:16px; box-shadow:10px 10px 0 #111; }
+.hero[data-style="neo-brutal"] .win .st { border:2px solid #111; color:#111; }
+/* Баугауз */
+.hero[data-style="bauhaus"] { font-family:"Jost",sans-serif; }
+.hero[data-style="bauhaus"] h1 { font-weight:900; letter-spacing:-.03em; text-transform:lowercase; }
+.hero[data-style="bauhaus"] .btns a, .hero[data-style="bauhaus"] .nav .cta { border-radius:0; font-weight:700; }
+.hero[data-style="bauhaus"] .b2 { border:2px solid var(--ink); backdrop-filter:none; background:transparent; }
+.hero[data-style="bauhaus"] .win { border-radius:0; box-shadow:12px 12px 0 #1f3a93; }
+/* Інтернаціональний стиль */
+.hero[data-style="swiss"] { font-family:"Inter Tight",sans-serif; }
+.hero[data-style="swiss"] h1 { font-weight:800; letter-spacing:-.055em; line-height:.92; font-size:clamp(48px,6.6vw,108px); }
+.hero[data-style="swiss"] .btns a, .hero[data-style="swiss"] .nav .cta { border-radius:0; }
+.hero[data-style="swiss"] .b2 { border:0; border-bottom:2px solid var(--ink); border-radius:0; padding-inline:0; backdrop-filter:none; background:none; }
+.hero[data-style="swiss"] .win { border-radius:0; box-shadow:none; border-top:6px solid var(--accent); }
+/* Редакційний */
+.hero[data-style="editorial"] { font-family:"Inter Tight",sans-serif; }
+.hero[data-style="editorial"] h1 { font-family:"Instrument Serif",serif; font-weight:400; letter-spacing:-.02em; line-height:.95; font-size:clamp(52px,6.8vw,112px); }
+.hero[data-style="editorial"] h1 em { font-style:italic; }
+.hero[data-style="editorial"] .btns a, .hero[data-style="editorial"] .nav .cta { border-radius:0; text-transform:uppercase; letter-spacing:.12em; font-size:12px; }
+.hero[data-style="editorial"] .win { border-radius:2px; }
+/* Y2K хром */
+.hero[data-style="y2k"] { font-family:"Syne",sans-serif; }
+.hero[data-style="y2k"] h1 { font-weight:800; letter-spacing:-.04em; }
+.hero[data-style="y2k"] .btns a, .hero[data-style="y2k"] .nav .cta { border-radius:999px; background:linear-gradient(180deg,#fff,#cfd8e6 45%,#9fb0c8 55%,#e9eef6); color:#0b1d4a; border:1px solid #8ea0bd; box-shadow:inset 0 1px 0 #fff, 0 6px 18px -6px rgb(0 40 140 / .5); }
+.hero[data-style="y2k"] .win { border-radius:24px; border:1px solid rgb(255 255 255 / .6); }
+/* Конструктивізм */
+.hero[data-style="constructivist"] { font-family:"Oswald",sans-serif; }
+.hero[data-style="constructivist"] h1 { text-transform:uppercase; font-weight:700; letter-spacing:-.01em; line-height:.9; font-size:clamp(52px,7vw,116px); }
+.hero[data-style="constructivist"] .btns a, .hero[data-style="constructivist"] .nav .cta { border-radius:0; text-transform:uppercase; letter-spacing:.06em; }
+.hero[data-style="constructivist"] .win { border-radius:0; transform:rotate(-3deg); box-shadow:none; border:3px solid #111; }
+/* Супрематизм */
+.hero[data-style="suprematism"] { font-family:"Jost",sans-serif; }
+.hero[data-style="suprematism"] h1 { font-weight:700; letter-spacing:-.03em; }
+.hero[data-style="suprematism"] .btns a, .hero[data-style="suprematism"] .nav .cta { border-radius:0; }
+.hero[data-style="suprematism"] .win { border-radius:0; box-shadow:none; border:1px solid #111; }
+/* Скло */
+.hero[data-style="glass"] .win { background:rgb(255 255 255 / .1); color:#fff; backdrop-filter:blur(24px) saturate(1.4); border:1px solid rgb(255 255 255 / .22); }
+.hero[data-style="glass"] .win .top, .hero[data-style="glass"] .win .row { border-color:rgb(255 255 255 / .12); color:rgb(255 255 255 / .7); } .hero[data-style="glass"] .win .who, .hero[data-style="glass"] .win .top b { color:#fff !important; }
+.hero[data-style="glass"] .win .av { background:rgb(255 255 255 / .15); color:#fff; } .hero[data-style="glass"] .np { background:rgb(255 255 255 / .08); }
+.hero[data-style="glass"] .b2 { border-color:rgb(255 255 255 / .35); background:rgb(255 255 255 / .08); }
+/* Японський мінімалізм */
+.hero[data-style="zen"] { font-family:"Noto Serif",serif; }
+.hero[data-style="zen"] h1 { font-weight:300; letter-spacing:-.01em; font-size:clamp(38px,4.4vw,68px); line-height:1.15; }
+.hero[data-style="zen"] .btns a, .hero[data-style="zen"] .nav .cta { border-radius:0; font-family:"Inter Tight"; font-weight:500; letter-spacing:.04em; }
+.hero[data-style="zen"] .b2 { border:0; border-bottom:1px solid var(--ink); border-radius:0; backdrop-filter:none; background:none; }
+.hero[data-style="zen"] .win { border-radius:0; box-shadow:0 30px 60px -40px rgb(0 0 0 / .25); }
+/* ЕПТ-термінал */
+.hero[data-style="crt"] { font-family:"VT323",monospace; }
+.hero[data-style="crt"] h1 { font-family:"VT323"; font-weight:400; font-size:clamp(44px,5.2vw,86px); line-height:.9; text-transform:uppercase; text-shadow:0 0 12px var(--accent); }
+.hero[data-style="crt"] :is(.notice,.lead,.facts,.nav) { font-size:22px; text-shadow:0 0 8px var(--accent); }
+.hero[data-style="crt"] .btns a, .hero[data-style="crt"] .nav .cta { border-radius:0; font-size:22px; }
+.hero[data-style="crt"] .win { border-radius:0; background:#031a06; color:#7dff8a; border:1px solid #1d5a24; font-family:"VT323"; font-size:18px; box-shadow:0 0 40px -10px #39ff5a; }
+.hero[data-style="crt"] .win .top, .hero[data-style="crt"] .win .row { border-color:#0f3a14; color:#4fd860; } .hero[data-style="crt"] .win .who, .hero[data-style="crt"] .win .top b { color:#b6ffbe !important; }
+.hero[data-style="crt"] .win .av, .hero[data-style="crt"] .win .st, .hero[data-style="crt"] .np, .hero[data-style="crt"] .np .ic { border-radius:0; background:transparent; border:1px solid #2f8a3a; color:#7dff8a; }
+.hero[data-style="crt"]::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg, rgb(0 0 0 / .28) 0 1px, transparent 1px 3px); animation:crt 6s steps(60) infinite; }
+@keyframes crt { 50% { opacity:.85 } }
+/* Рейв / кислотний */
+.hero[data-style="acid"] { font-family:"Unbounded",sans-serif; }
+.hero[data-style="acid"] h1 { font-weight:900; letter-spacing:-.04em; text-transform:uppercase; line-height:.92; font-size:clamp(32px,4.2vw,68px); }
+.hero[data-style="acid"] .btns a, .hero[data-style="acid"] .nav .cta { border-radius:999px; font-weight:600; }
+.hero[data-style="acid"] .win { border-radius:28px; }
+/* Креслення */
+.hero[data-style="blueprint"] { font-family:"JetBrains Mono",monospace; }
+.hero[data-style="blueprint"] h1 { font-family:"Inter Tight"; font-weight:500; letter-spacing:-.04em; }
+.hero[data-style="blueprint"] .btns a, .hero[data-style="blueprint"] .nav .cta { border-radius:0; }
+.hero[data-style="blueprint"] .b2 { border:1px dashed var(--ink); backdrop-filter:none; background:none; }
+.hero[data-style="blueprint"] .win { border-radius:0; box-shadow:none; outline:1px dashed rgb(255 255 255 / .6); outline-offset:10px; }
+/* Газета */
+.hero[data-style="newspaper"] { font-family:"Noto Serif",serif; }
+.hero[data-style="newspaper"] h1 { font-family:"Playfair Display",serif; font-weight:700; letter-spacing:-.02em; line-height:.95; font-size:clamp(48px,6vw,96px); }
+.hero[data-style="newspaper"] .btns a, .hero[data-style="newspaper"] .nav .cta { border-radius:0; font-family:"Inter Tight"; text-transform:uppercase; letter-spacing:.1em; font-size:12px; }
+.hero[data-style="newspaper"] .win { border-radius:0; box-shadow:none; border:1px solid #111; filter:grayscale(1); }
+/* Мемфіс */
+.hero[data-style="memphis"] { font-family:"Space Grotesk",sans-serif; }
+.hero[data-style="memphis"] h1 { font-weight:700; letter-spacing:-.04em; }
+.hero[data-style="memphis"] .btns a, .hero[data-style="memphis"] .nav .cta { border-radius:0; border:2px solid #111; box-shadow:4px 4px 0 #111; color:#111; }
+.hero[data-style="memphis"] .win { border:2px solid #111; border-radius:0; box-shadow:12px 12px 0 #00C2A8; }
 @media (max-width: 860px) { .in { grid-template-columns: 1fr; } .nav nav { display: none; } .win { display: none; } }
 </style>
 </head>
@@ -188,7 +294,89 @@ const V = [
     p: { bg: '#0C0C10', surface: '#FF7AB6', ink: '#F2FBFF', accent: '#5CE1E6', accentInk: '#0C0C10' } },
   { gl: 'ink', id: 'g-ink', name: '53. Чорнило', note: 'Чорнило розтікається у воді, висока чіткість',
     p: { bg: '#F3F5F8', surface: '#FF5A36', ink: '#0B1F3A', accent: '#0B1F3A', accentInk: '#ffffff' } },
+  // ---- 54-69: стилі (брутализм, модернізм і т.д.) ----
+  { style: 'swiss-brutal', flat: 1, deco: 'swissBrutal', id: 's-swiss-brutal', name: '54. Брутал-друк', note: 'Industrial brutalism: газетний папір, чорнило, авіаційний червоний, видима сітка',
+    p: { bg: '#F4F4F0', ink: '#111111', accent: '#E61919', accentInk: '#ffffff' } },
+  { style: 'terminal', glBg: 'dither', glP: { bg: '#0A0A0A', surface: '#1a1a1a', ink: '#EAEAEA', accent: '#3A0E0E' }, deco: 'terminal', id: 's-terminal', name: '55. Тактичний термінал', note: 'Брутальний телеметричний інтерфейс: моноширинний шрифт, дужки, приціли, червоний',
+    p: { bg: '#0A0A0A', ink: '#EAEAEA', accent: '#E61919', accentInk: '#ffffff' } },
+  { style: 'neo-brutal', flat: 1, deco: 'neo', id: 's-neo', name: '56. Необруталізм', note: 'Жовтий, товсті чорні рамки й жорсткі тіні, як у Gumroad',
+    p: { bg: '#FFE14D', ink: '#111111', accent: '#FF6BCB', accentInk: '#111111' } },
+  { style: 'bauhaus', flat: 1, deco: 'bauhaus', id: 's-bauhaus', name: '57. Баугауз', note: 'Модернізм 1920-х: коло, квадрат, трикутник, основні кольори',
+    p: { bg: '#F5F5F0', ink: '#111111', accent: '#E53A1F', accentInk: '#ffffff' } },
+  { style: 'swiss', flat: 1, deco: 'swiss', id: 's-swiss', name: '58. Швейцарський стиль', note: 'Інтернаціональний стиль: сітка, гротеск, одне червоне коло',
+    p: { bg: '#FFFFFF', ink: '#111111', accent: '#FF2D20', accentInk: '#ffffff' } },
+  { style: 'editorial', glBg: 'ink', glP: { bg: '#0E0E0E', surface: '#0E0E0E', ink: '#F2F0EB', accent: '#2B2B2B' }, h1: 'Свій магазин <em>без розробника</em>', id: 's-editorial', name: '59. Редакційний', note: 'Модний журнал: великий серифний заголовок курсивом на чорному з чорнилом',
+    p: { bg: '#0E0E0E', ink: '#F2F0EB', accent: '#F2F0EB', accentInk: '#0E0E0E' } },
+  { style: 'y2k', glBg: 'chrome', glP: { bg: '#DCE6F5', surface: '#AFC3E8', ink: '#0B1D4A', accent: '#5B7FFF' }, id: 's-y2k', name: '60. Y2K хром', note: 'Нульові: хромований метал, глянцеві кнопки-таблетки',
+    p: { bg: '#DCE6F5', ink: '#0B1D4A', accent: '#0B1D4A', accentInk: '#ffffff' } },
+  { style: 'constructivist', flat: 1, deco: 'constructivist', id: 's-constructivist', name: '61. Конструктивізм', note: 'Авангард 1920-х: діагоналі, червоне й чорне, гасло',
+    p: { bg: '#F2F2EE', ink: '#111111', accent: '#D7261E', accentInk: '#ffffff' } },
+  { style: 'suprematism', flat: 1, deco: 'suprematism', id: 's-suprematism', name: '62. Супрематизм', note: 'Малевич (народився в Києві): кольорові площини пливуть у білому просторі',
+    p: { bg: '#FFFFFF', ink: '#111111', accent: '#111111', accentInk: '#ffffff' } },
+  { style: 'glass', glBg: 'grainorb', glP: { bg: '#0B0B14', surface: '#3D7BFF', ink: '#FF8A3D', accent: '#FF4F8B' }, id: 's-glass', name: '63. Скляний', note: 'Glassmorphism: матове скло вікна над світними кулями',
+    p: { bg: '#0B0B14', ink: '#FFFFFF', accent: '#FFFFFF', accentInk: '#0B0B14' } },
+  { style: 'zen', flat: 1, deco: 'zen', id: 's-zen', name: '64. Дзен', note: 'Японський мінімалізм: багато повітря, тонкий сериф, одна червона точка',
+    p: { bg: '#FAFAF7', ink: '#1A1A1A', accent: '#1A1A1A', accentInk: '#FAFAF7' } },
+  { style: 'crt', flat: 1, id: 's-crt', name: '65. ЕПТ-монітор', note: 'Зелений люмінофор, рядки розгортки, піксельний шрифт',
+    p: { bg: '#020A03', ink: '#7DFF8A', accent: '#39FF5A', accentInk: '#020A03' } },
+  { style: 'acid', glBg: 'neuro', glP: { bg: '#0A0A0A', surface: '#5A6B00', ink: '#E8FF3A', accent: '#C8FF00' }, id: 's-acid', name: '66. Кислотний', note: 'Рейв-естетика: кислотний лайм, широкий шрифт, неонові лінії',
+    p: { bg: '#0A0A0A', ink: '#E8FF3A', accent: '#E8FF3A', accentInk: '#0A0A0A' } },
+  { style: 'blueprint', flat: 1, deco: 'blueprint', id: 's-blueprint', name: '67. Креслення', note: 'Технічне креслення: синя калька, сітка, розміри й позначки',
+    p: { bg: '#0B3D91', ink: '#FFFFFF', accent: '#FFFFFF', accentInk: '#0B3D91' } },
+  { style: 'newspaper', glBg: 'halftone', glP: { bg: '#EDEDE8', surface: '#111111', ink: '#111111', accent: '#111111' }, deco: 'newspaper', id: 's-newspaper', name: '68. Газета', note: 'Перша шпальта: серифний заголовок, колонки, друкарський растр',
+    p: { bg: '#EDEDE8', ink: '#111111', accent: '#111111', accentInk: '#EDEDE8' } },
+  { style: 'memphis', flat: 1, deco: 'memphis', id: 's-memphis', name: '69. Мемфіс', note: 'Дизайн 80-х: зигзаги, горох, трикутники, рожевий і бірюзовий',
+    p: { bg: '#FFE8F2', ink: '#111111', accent: '#FF3E7F', accentInk: '#ffffff' } },
 ];
+
+
+// декоративні шари для стилів 54+
+const DECO = {
+  swissBrutal: `<div class="deco"><style>.sb-v{position:absolute;top:0;bottom:0;width:1px;background:#111;opacity:.14}.sb-t{position:absolute;font:11px "JetBrains Mono";letter-spacing:.1em;color:#111;text-transform:uppercase}</style>
+    ${Array.from({length:13},(_,i)=>`<i class="sb-v" style="left:${(i/12*100).toFixed(2)}%"></i>`).join('')}
+    <i style="position:absolute;left:0;right:0;top:86px;height:2px;background:#111"></i><i style="position:absolute;right:0;top:0;width:34%;height:12px;background:#E61919"></i>
+    <span class="sb-t" style="right:24px;top:96px">N° 001 / CARTLY / KYIV 2026</span><span class="sb-t" style="right:24px;bottom:110px">ЗАМОВЛЕННЯ — ОПЛАТА — ДОСТАВКА</span></div>`,
+  terminal: `<div class="deco"><style>.tm{position:absolute;font:11px "JetBrains Mono";color:#9a9a9a;letter-spacing:.12em;text-transform:uppercase}.tc{position:absolute;width:22px;height:22px;border:1px solid #E61919}</style>
+    <span class="tc" style="left:20px;top:80px;border-right:0;border-bottom:0"></span><span class="tc" style="right:20px;top:80px;border-left:0;border-bottom:0"></span>
+    <span class="tc" style="left:20px;bottom:80px;border-right:0;border-top:0"></span><span class="tc" style="right:20px;bottom:80px;border-left:0;border-top:0"></span>
+    <span class="tm" style="right:48px;top:84px">SYS.ORDERS [06] · NP.API <b style="color:#4AF626">OK</b> · LAT 50.45 LON 30.52</span><span class="tm" style="left:48px;bottom:84px">UPTIME 99.98% · BUILD 2026.11</span></div>`,
+  neo: `<div class="deco"><style>@keyframes nb{50%{transform:translateY(-14px) rotate(8deg)}}.nb{position:absolute;border:3px solid #111;box-shadow:6px 6px 0 #111;animation:nb 6s ease-in-out infinite}</style>
+    <div class="nb" style="right:6%;top:14%;width:120px;height:120px;border-radius:50%;background:#FF6BCB"></div>
+    <div class="nb" style="right:40%;bottom:10%;width:90px;height:90px;background:#3D7BFF;animation-delay:-2s"></div>
+    <div class="nb" style="right:3%;bottom:16%;width:150px;height:60px;border-radius:30px;background:#7CF2B0;animation-delay:-4s"></div></div>`,
+  bauhaus: `<div class="deco"><style>@keyframes bh{to{transform:rotate(360deg)}}</style>
+    <div style="position:absolute;right:-6%;top:-10%;width:46vw;height:46vw;border-radius:50%;background:#1F3A93"></div>
+    <div style="position:absolute;right:26%;bottom:-8%;width:18vw;height:18vw;background:#E53A1F;animation:bh 60s linear infinite"></div>
+    <div style="position:absolute;right:6%;bottom:6%;width:0;height:0;border-left:9vw solid transparent;border-right:9vw solid transparent;border-bottom:15vw solid #F5C518"></div>
+    <div style="position:absolute;left:48%;right:0;top:52%;height:10px;background:#111;transform:rotate(-8deg);transform-origin:right"></div></div>`,
+  swiss: `<div class="deco"><style>.sw{position:absolute;top:0;bottom:0;width:1px;background:#111;opacity:.08}</style>
+    ${Array.from({length:7},(_,i)=>`<i class="sw" style="left:${(i/6*100).toFixed(2)}%"></i>`).join('')}
+    <div style="position:absolute;right:-12vw;top:8vh;width:58vw;height:58vw;border-radius:50%;background:#FF2D20"></div>
+    <span style="position:absolute;right:32px;bottom:96px;font:800 160px/0.8 'Inter Tight';letter-spacing:-.06em;color:#111">01</span></div>`,
+  constructivist: `<div class="deco">
+    <div style="position:absolute;right:-18%;top:58%;width:62%;height:110px;background:#D7261E;transform:rotate(-24deg)"></div>
+    <div style="position:absolute;right:10%;top:8%;width:260px;height:260px;border-radius:50%;background:#111"></div>
+    <span style="position:absolute;right:4%;bottom:12%;font:700 90px/1 Oswald;color:#111;transform:rotate(-24deg);letter-spacing:.02em">ПРОДАВАЙ!</span></div>`,
+  suprematism: `<div class="deco"><style>@keyframes sp{50%{transform:translate(10px,-12px) rotate(var(--r2))}}.sp{position:absolute;animation:sp 9s ease-in-out infinite}</style>
+    <div class="sp" style="right:28%;top:18%;width:190px;height:70px;background:#111;transform:rotate(-14deg);--r2:-10deg"></div>
+    <div class="sp" style="right:12%;top:40%;width:120px;height:120px;background:#D7261E;transform:rotate(18deg);--r2:24deg;animation-delay:-3s"></div>
+    <div class="sp" style="right:36%;bottom:16%;width:260px;height:26px;background:#1F3A93;transform:rotate(-30deg);--r2:-34deg;animation-delay:-5s"></div>
+    <div class="sp" style="right:6%;bottom:22%;width:70px;height:70px;border-radius:50%;background:#F5C518;--r2:0deg;animation-delay:-1s"></div>
+    <div class="sp" style="right:50%;top:12%;width:44px;height:180px;background:#2D7A3E;transform:rotate(30deg);--r2:36deg;animation-delay:-7s"></div></div>`,
+  zen: `<div class="deco"><div style="position:absolute;right:12%;top:16%;width:64px;height:64px;border-radius:50%;background:#C8102E"></div>
+    <div style="position:absolute;right:8%;top:16%;bottom:16%;width:1px;background:#1A1A1A;opacity:.25"></div>
+    <span style="position:absolute;right:calc(8% + 14px);bottom:16%;writing-mode:vertical-rl;font:300 14px 'Noto Serif';letter-spacing:.4em;color:#1A1A1A;opacity:.6">ТИША · ПОРЯДОК · ПРОДАЖІ</span></div>`,
+  blueprint: `<div class="deco"><div style="position:absolute;inset:0;background-image:linear-gradient(rgb(255 255 255 / .08) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / .08) 1px,transparent 1px),linear-gradient(rgb(255 255 255 / .18) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / .18) 1px,transparent 1px);background-size:20px 20px,20px 20px,100px 100px,100px 100px"></div>
+    <span style="position:absolute;right:48px;bottom:96px;font:11px 'JetBrains Mono';color:#fff;opacity:.8;letter-spacing:.1em">АРК. 01 / CARTLY / М 1:1 / ВЕРСІЯ 0.1</span>
+    <div style="position:absolute;left:52%;right:4%;top:15%;border-top:1px solid #fff;opacity:.6"></div><span style="position:absolute;left:70%;top:calc(15% - 18px);font:11px 'JetBrains Mono';color:#fff">640 px</span></div>`,
+  newspaper: `<div class="deco"><div style="position:absolute;left:4%;right:4%;top:84px;border-top:3px double #111"></div>
+    <span style="position:absolute;right:4%;top:92px;font:12px 'Noto Serif';letter-spacing:.14em;text-transform:uppercase;color:#111">Випуск №1 · Вівторок, 17 листопада 2026 · Ціна: 0% комісії</span></div>`,
+  memphis: `<div class="deco"><svg width="100%" height="100%" style="position:absolute;inset:0"><defs><pattern id="md" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="#111"/></pattern></defs>
+    <rect x="62%" y="8%" width="220" height="140" fill="url(#md)"/><path d="M1000 640 l30 -30 l30 30 l30 -30 l30 30 l30 -30 l30 30" stroke="#00C2A8" stroke-width="10" fill="none" transform="translate(-200,0)"/>
+    <polygon points="1180,120 1260,250 1100,250" fill="#FFD23F" stroke="#111" stroke-width="3"/><circle cx="1300" cy="560" r="46" fill="#00C2A8" stroke="#111" stroke-width="3"/>
+    <rect x="880" y="660" width="120" height="40" fill="#FF3E7F" stroke="#111" stroke-width="3" transform="rotate(-12 940 680)"/></svg></div>`,
+};
+const H1 = document.querySelector('h1').innerHTML;
 
 const hero = document.getElementById('hero'), stage = document.getElementById('stage');
 const bar = document.getElementById('bar'), label = document.getElementById('label');
@@ -206,7 +394,12 @@ async function show(i) {
   const el = document.createElement('div');
   el.style.cssText = 'position:absolute;inset:0';
   stage.appendChild(el);
-  if (v.gl) {
+  hero.dataset.style = v.style || ''; if (!v.style) delete hero.dataset.style;
+  document.querySelector('h1').innerHTML = v.h1 || H1;
+  if (v.style) {
+    if (v.glBg) current = mountGL(el, v.glBg, v.glP || v.p, null); else current = { destroy() {} };
+    if (v.deco) stage.insertAdjacentHTML('beforeend', DECO[v.deco]);
+  } else if (v.gl) {
     const scrim = document.createElement('div');
     current = mountGL(el, v.gl, v.p, v.gl === 'border' ? () => document.querySelector('.win')?.getBoundingClientRect() : null);
   } else if (v.custom) {
