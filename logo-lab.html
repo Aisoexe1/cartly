@@ -71,7 +71,8 @@ h1{font:600 40px/1.1 "Inter Tight";letter-spacing:-.035em;margin:0 0 8px}.intro{
 
 <script>
 const L = [
-  ['m-mono', '7. Монограма', 'Бірюзовий квадрат як іконка застосунку, у ньому мала c і крапка-колесо. Найкраще працює як іконка й фавікон.', true],
+  ['m-rainbow', '3. Веселка C · обрано', 'Три дуги наших кольорів і зелена крапка складаються в C. Фінальні файли: /brand (SVG, PNG, фавікон, іконка застосунку).', true],
+  ['m-mono', '7. Монограма', 'Бірюзовий квадрат як іконка застосунку, у ньому мала c і крапка-колесо. Найкраще працює як іконка й фавікон.', false],
   ['m-arrow', '8. C-стрілка', 'Кінець літери C перетворюється на бірюзову стрілку: замовлення рухається вперед, від кошика до клієнта.', false],
   ['m-route', '9. Маршрут', 'C як шлях посилки пунктиром, на кінці бірюзовий пін точки видачі. Про доставку і Нову Пошту.', false],
   ['m-box', '10. Коробка', 'Темна посилка з бірюзовим скотчем. Чесно про те, що відбувається після продажу.', false],
@@ -87,7 +88,7 @@ const L = [
 const use = (id, color) => id === 'wordmark' ? '' : `<svg viewBox="0 0 48 48" style="color:${color}"><use href="#${id}"/></svg>`;
 document.getElementById('list').innerHTML = L.map(([id, name, why, pick]) => `
   <div class="card">
-    <div><h2>${name}</h2><p>${why}</p>${pick ? '<span class="pick">Мій вибір</span>' : ''}</div>
+    <div><h2>${name}</h2><p>${why}</p>${pick ? '<span class="pick">Обрано</span>' : ''}</div>
     <div class="row">
       <div class="tile"><div class="lock">${use(id, '#18181B')}<span>cartly${id==='wordmark'?'<b style="color:#00A6C8">.</b>':''}</span></div></div>
       <div class="tile dark"><div class="lock">${use(id, '#FFFFFF')}<span>cartly${id==='wordmark'?'<b style="color:#00A6C8">.</b>':''}</span></div></div>
