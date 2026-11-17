@@ -75,6 +75,7 @@ h1 { margin: 0; font-size: clamp(40px, 5.2vw, 76px); line-height: 1.02; letter-s
 <script type="module">
 import fx from './assets/effects/fx.js';
 import { FX as CFX, rgba } from './assets/hero-lab-fx.js';
+import { mountGL } from './assets/hero-lab-gl.js';
 
 // Варіанти: двоколірна палітра + один ефект за текстом. calm тримає зону заголовка спокійною.
 const V = [
@@ -162,67 +163,31 @@ const V = [
     p: { bg: '#0A0A0A', surface: '#1A1A1A', ink: '#FFEDE8', accent: '#FF4D2E', accentInk: '#0A0A0A' } },
   { custom: 'tags', id: 'c-tags', name: '41. Цінники', note: 'Плавають цінники й кошики, курсор їх розштовхує',
     p: { bg: '#F3F9FF', surface: '#DDEBFA', ink: '#3D0A1E', accent: '#FF3366', accentInk: '#ffffff' } },
-  // ---- 42-71: ще 30 ----
-  { custom: 'rain', id: 'c-rain', name: '42. Дощ', note: 'Діагональні краплі на склі, як вечір у місті',
-    p: { bg: '#0C1220', surface: '#0C1220', ink: '#EAF6FF', accent: '#8FD3FF', accentInk: '#0C1220' } },
-  { custom: 'confetti', id: 'c-confetti', name: '43. Конфеті', note: 'Падає конфеті, як свято першого продажу',
-    p: { bg: '#FFFFFF', surface: '#FFFFFF', ink: '#2A0A14', accent: '#FF3366', accentInk: '#ffffff' } },
-  { custom: 'stripes', id: 'c-stripes', name: '44. Смуги', note: 'Повільні діагональні смуги, спокійний ритм',
-    p: { bg: '#F4FFF8', surface: '#F4FFF8', ink: '#063D27', accent: '#00A86B', accentInk: '#ffffff' } },
-  { custom: 'sonar', id: 'c-sonar', name: '45. Сонар', note: 'Кола від точки за вікном: пінг нового замовлення',
-    p: { bg: '#0A0F1F', surface: '#0A0F1F', ink: '#E6FAFF', accent: '#3DDCFF', accentInk: '#0A0F1F' } },
-  { custom: 'orbit', id: 'c-orbit', name: '46. Орбіти', note: 'Коробки обертаються по орбітах навколо центру',
-    p: { bg: '#F5F7FF', surface: '#F5F7FF', ink: '#0B1A66', accent: '#2B50FF', accentInk: '#ffffff' } },
-  { custom: 'fabric', id: 'c-fabric', name: '47. Тканина', note: 'Сітка вигинається, як тканина на вітрі',
-    p: { bg: '#111111', surface: '#111111', ink: '#FFF6D6', accent: '#FFC400', accentInk: '#111111' } },
-  { custom: 'popdots', id: 'c-popdots', name: '48. Поп-арт', note: 'Точки ростуть і зменшуються хвилею, як на коміксі',
-    p: { bg: '#FFE600', surface: '#FFE600', ink: '#111111', accent: '#111111', accentInk: '#FFE600' } },
-  { custom: 'equalizer', id: 'c-equalizer', name: '49. Еквалайзер', note: 'Стовпчики продажів танцюють, як еквалайзер',
-    p: { bg: '#0B1410', surface: '#0B1410', ink: '#E8FFF0', accent: '#3BFF8F', accentInk: '#0B1410' } },
-  { custom: 'chart', id: 'c-chart', name: '50. Графік', note: 'Лінія виручки росте знову і знову',
-    p: { bg: '#F7FAFF', surface: '#F7FAFF', ink: '#0A1F5C', accent: '#1F6BFF', accentInk: '#ffffff' } },
-  { custom: 'stars', id: 'c-stars', name: '51. Сузірʼя', note: 'Зорі мерехтять, частина зʼєднана в сузірʼя',
-    p: { bg: '#070B18', surface: '#070B18', ink: '#FFF8E0', accent: '#FFE08A', accentInk: '#070B18' } },
-  { custom: 'smoke', id: 'c-smoke', name: '52. Дим', note: 'Мʼякий дим повільно тече праворуч',
-    p: { bg: '#EEF1F5', surface: '#EEF1F5', ink: '#141C2B', accent: '#3A4A66', accentInk: '#ffffff' } },
-  { custom: 'synth', id: 'c-synth', name: '53. Сінтвейв', note: 'Ретро-сонце над сіткою, як у 80-х',
-    p: { bg: '#0A0A14', surface: '#0A0A14', ink: '#FFF0E4', accent: '#FF7A1A', accentInk: '#ffffff' } },
-  { custom: 'cubes', id: 'c-cubes', name: '54. Кубики', note: 'Каркасні коробки обертаються в просторі',
-    p: { bg: '#F6F8FB', surface: '#F6F8FB', ink: '#1A1F2B', accent: '#FF5A1F', accentInk: '#ffffff' } },
-  { custom: 'torus', id: 'c-torus', name: '55. Тор', note: 'Тор із точок обертається за вікном',
-    p: { bg: '#050505', surface: '#050505', ink: '#E6FDFF', accent: '#00F0FF', accentInk: '#050505' } },
-  { custom: 'ridges', id: 'c-ridges', name: '56. Гори', note: 'Хребти ліній, як обкладинка платівки',
-    p: { bg: '#0D0D0D', surface: '#0D0D0D', ink: '#FFFFFF', accent: '#FFFFFF', accentInk: '#0D0D0D' } },
-  { custom: 'bubbles', id: 'c-bubbles', name: '57. Бульбашки', note: 'Бульбашки піднімаються, як у газованці',
-    p: { bg: '#E9FFF6', surface: '#E9FFF6', ink: '#043D29', accent: '#00B37A', accentInk: '#ffffff' } },
-  { custom: 'mosaic', id: 'c-mosaic', name: '58. Мозаїка', note: 'Плитки спалахують і гаснуть плямами',
-    p: { bg: '#0E1A2B', surface: '#0E1A2B', ink: '#E9F3FF', accent: '#4DA3FF', accentInk: '#ffffff' } },
-  { custom: 'marquee', id: 'c-marquee', name: '59. Біжучий рядок', note: 'Великі слова ЗАМОВЛЕННЯ, ОПЛАТА, СКЛАД пливуть за текстом',
-    p: { bg: '#FAFAFA', surface: '#FAFAFA', ink: '#1A1A1A', accent: '#E4002B', accentInk: '#ffffff' } },
-  { custom: 'ink', id: 'c-ink', name: '60. Чорнило', note: 'Слід чорнила за курсором, без курсора малює сам',
-    p: { bg: '#FFFFFF', surface: '#FFFFFF', ink: '#0A1F4D', accent: '#0057FF', accentInk: '#ffffff' } },
-  { custom: 'kaleido', id: 'c-kaleido', name: '61. Калейдоскоп', note: 'Дзеркальні пелюстки повільно обертаються',
-    p: { bg: '#08121A', surface: '#08121A', ink: '#FFF2E4', accent: '#FF9E3D', accentInk: '#08121A' } },
-  { custom: 'dunes', id: 'c-dunes', name: '62. Дюни', note: 'Шари пагорбів зсуваються, як пісок увечері',
-    p: { bg: '#0F1B2D', surface: '#0F1B2D', ink: '#FFF1E8', accent: '#FFB38A', accentInk: '#0F1B2D' } },
-  { custom: 'tunnel', id: 'c-tunnel', name: '63. Тунель', note: 'Неоновий тунель тягне вперед',
-    p: { bg: '#000000', surface: '#000000', ink: '#E6FFF5', accent: '#00FFA3', accentInk: '#000000' } },
-  { custom: 'sparks', id: 'c-sparks', name: '64. Блискавка', note: 'Зрідка спалахує блискавка',
-    p: { bg: '#05070D', surface: '#05070D', ink: '#EEF4FF', accent: '#A9C6FF', accentInk: '#05070D' } },
-  { custom: 'fireflies', id: 'c-fireflies', name: '65. Світлячки', note: 'Світлячки блукають у темряві',
-    p: { bg: '#071510', surface: '#071510', ink: '#F4FFE0', accent: '#D7FF6B', accentInk: '#071510' } },
-  { custom: 'planes', id: 'c-planes', name: '66. Літачки', note: 'Паперові літачки летять, як сповіщення клієнтам',
-    p: { bg: '#EAF4FF', surface: '#EAF4FF', ink: '#071E5C', accent: '#1C5BFF', accentInk: '#ffffff' } },
-  { custom: 'coins', id: 'c-coins', name: '67. Монети', note: 'Падають монети з гривнею',
-    p: { bg: '#0E2A1F', surface: '#0E2A1F', ink: '#FFF7E0', accent: '#FFD15C', accentInk: '#0E2A1F' } },
-  { custom: 'barcode', id: 'c-barcode', name: '68. Штрихкод', note: 'Сканер проходить по штрихкодах, як на складі',
-    p: { bg: '#F2F5F9', surface: '#F2F5F9', ink: '#141821', accent: '#E01E37', accentInk: '#ffffff' } },
-  { custom: 'heatmap', id: 'c-heatmap', name: '69. Теплова карта', note: 'Плями тепла, як аналітика кліків',
-    p: { bg: '#0B0F19', surface: '#0B0F19', ink: '#FFE8EE', accent: '#FF4D6D', accentInk: '#ffffff' } },
-  { custom: 'ripples', id: 'c-ripples', name: '70. Брижі', note: 'Краплі падають у воду, розходяться кола',
-    p: { bg: '#E8F7FF', surface: '#E8F7FF', ink: '#03304D', accent: '#0077B6', accentInk: '#ffffff' } },
-  { custom: 'traffic', id: 'c-traffic', name: '71. Трафік', note: 'Смуги руху, посилки мчать доріжками',
-    p: { bg: '#121212', surface: '#121212', ink: '#FFF9DB', accent: '#FFCC00', accentInk: '#121212' } },
+  // ---- 42-53: WebGL-шейдери за трендами 2026 ----
+  { gl: 'chrome', id: 'g-chrome', name: '42. Рідкий хром', note: 'Жидкий метал з райдужним відливом, тренд 2026',
+    p: { bg: '#0A0B0D', surface: '#3A4A66', ink: '#F4F7FB', accent: '#C9D6E8', accentInk: '#0A0B0D' } },
+  { gl: 'dither', id: 'g-dither', name: '43. Дизер', note: 'Bayer-дизер у два кольори, курсор пускає хвилю (Codrops)',
+    p: { bg: '#0F1A12', surface: '#2A4A2E', ink: '#EFFFE0', accent: '#B8FF5A', accentInk: '#0F1A12' } },
+  { gl: 'grainorb', id: 'g-grainorb', name: '44. Зернистий блюр', note: 'Світні кулі з плівковим зерном, як постер',
+    p: { bg: '#EEF2F7', surface: '#FFB199', ink: '#16181D', accent: '#FF4F2E', accentInk: '#ffffff' } },
+  { gl: 'glass', id: 'g-glass', name: '45. Скло', note: 'Liquid Glass: лінза заломлює світло, рухається за курсором',
+    p: { bg: '#0B1020', surface: '#7FD4FF', ink: '#EAF1FF', accent: '#3D7BFF', accentInk: '#0B1020' } },
+  { gl: 'stripe', id: 'g-stripe', name: '46. Стрічка', note: 'Градієнтна хвиля в дусі Stripe, мʼяко дихає',
+    p: { bg: '#F6F8FC', surface: '#2E5BFF', ink: '#0B1A3A', accent: '#FF5A36', accentInk: '#ffffff' } },
+  { gl: 'ring', id: 'g-ring', name: '47. Кільце', note: 'Світне димне кільце за вікном замовлень',
+    p: { bg: '#06080F', surface: '#FFD27A', ink: '#FFF0E6', accent: '#FF7A2F', accentInk: '#06080F' } },
+  { gl: 'neuro', id: 'g-neuro', name: '48. Нейро', note: 'Неонові нервові лінії з обертових синусів',
+    p: { bg: '#050816', surface: '#2E7BFF', ink: '#E6FBFF', accent: '#3DE0FF', accentInk: '#050816' } },
+  { gl: 'parcels', id: 'g-parcels', name: '49. Коробки', note: '3D-поле коробок, хвиля проходить складом',
+    p: { bg: '#0D1117', surface: '#2A3240', ink: '#FFEDE5', accent: '#FF6B3D', accentInk: '#0D1117' } },
+  { gl: 'halftone', id: 'g-halftone', name: '50. Друк', note: 'Журнальний растр: точки ростуть хвилею',
+    p: { bg: '#F7F7F5', surface: '#0038E0', ink: '#0B1A4A', accent: '#0038E0', accentInk: '#ffffff' } },
+  { gl: 'border', id: 'g-border', name: '51. Сяйво рамки', note: 'Вікно замовлень світиться, світло біжить по периметру',
+    p: { bg: '#07080C', surface: '#3DA8FF', ink: '#FFE9F0', accent: '#FF3D7F', accentInk: '#07080C' } },
+  { gl: 'foil', id: 'g-foil', name: '52. Фольга', note: 'Голографічна фольга, відблиск рухається за курсором',
+    p: { bg: '#0C0C10', surface: '#FF7AB6', ink: '#F2FBFF', accent: '#5CE1E6', accentInk: '#0C0C10' } },
+  { gl: 'ink', id: 'g-ink', name: '53. Чорнило', note: 'Чорнило розтікається у воді, висока чіткість',
+    p: { bg: '#F3F5F8', surface: '#FF5A36', ink: '#0B1F3A', accent: '#0B1F3A', accentInk: '#ffffff' } },
 ];
 
 const hero = document.getElementById('hero'), stage = document.getElementById('stage');
@@ -241,7 +206,10 @@ async function show(i) {
   const el = document.createElement('div');
   el.style.cssText = 'position:absolute;inset:0';
   stage.appendChild(el);
-  if (v.custom) {
+  if (v.gl) {
+    const scrim = document.createElement('div');
+    current = mountGL(el, v.gl, v.p, v.gl === 'border' ? () => document.querySelector('.win')?.getBoundingClientRect() : null);
+  } else if (v.custom) {
     const cv = document.createElement('canvas'); cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
     const scrim = document.createElement('div');
     scrim.style.cssText = `position:absolute;inset:0;background:linear-gradient(90deg, ${rgba(v.p.bg, .92)} 0%, ${rgba(v.p.bg, .7)} 30%, ${rgba(v.p.bg, 0)} 58%)`;
