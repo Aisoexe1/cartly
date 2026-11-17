@@ -198,3 +198,115 @@ export const FX = {
           c.strokeStyle = rgba(p.accent, .5); c.lineWidth = 1; c.stroke(); c.fillStyle = rgba(p.accent, .9); c.beginPath(); c.arc(-tw / 2 + 9, 0, 2.5, 0, 7); c.fill(); c.fillText(label, -tw / 2 + 17, 1); }
         c.restore(); } } }; },
 };
+
+// ---------- ще 30 (42-71) ----------
+const T2 = Math.PI * 2;
+Object.assign(FX, {
+  rain(p) { const R = rnd(41); const d = Array.from({ length: 260 }, () => ({ x: R(), y: R(), l: 10 + R() * 40, s: .6 + R() }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.strokeStyle = rgba(p.accent, .35); c.lineWidth = 1;
+      for (const q of d) { const y = ((q.y + t * .25 * q.s) % 1) * (h + 60) - 30, x = q.x * w * 1.2 - y * .25; c.beginPath(); c.moveTo(x, y); c.lineTo(x - q.l * .25, y - q.l); c.stroke(); } } }; },
+  confetti(p) { const R = rnd(42); const d = Array.from({ length: 120 }, () => ({ x: .3 + R() * .7, y: R(), r: R() * 7, s: .3 + R() * .7, z: 4 + R() * 7 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg);
+      for (const q of d) { const y = ((q.y + t * .04 * q.s) % 1) * (h + 40) - 20, x = q.x * w + Math.sin(t + q.r) * 20;
+        c.save(); c.translate(x, y); c.rotate(t * q.s * 2 + q.r); c.scale(1, Math.cos(t * 3 * q.s + q.r)); c.fillStyle = rgba(q.r > 3.5 ? p.accent : p.ink, .7); c.fillRect(-q.z / 2, -q.z / 4, q.z, q.z / 2); c.restore(); } } }; },
+  stripes(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.save(); c.translate(w * .6, h * .5); c.rotate(-.5);
+    for (let i = -40; i < 40; i++) { const x = i * 34 + (t * 20) % 34; c.fillStyle = rgba(p.accent, .08 + .06 * Math.sin(i * .5 + t)); c.fillRect(x, -h * 1.5, 14, h * 3); } c.restore(); } }; },
+  sonar(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const cx = w * .7, cy = h * .5;
+    for (let i = 0; i < 6; i++) { const k = ((t * .3 + i / 6) % 1); c.strokeStyle = rgba(p.accent, (1 - k) * .6); c.lineWidth = 2; c.beginPath(); c.arc(cx, cy, k * Math.max(w, h) * .6, 0, T2); c.stroke(); }
+    c.fillStyle = p.accent; c.beginPath(); c.arc(cx, cy, 5, 0, T2); c.fill(); } }; },
+  orbit(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const cx = w * .7, cy = h * .5;
+    for (let r = 1; r <= 4; r++) { const R0 = r * 85; c.strokeStyle = rgba(p.accent, .15); c.beginPath(); c.ellipse(cx, cy, R0, R0 * .45, 0, 0, T2); c.stroke();
+      for (let k = 0; k < r; k++) { const a = t * (.5 / r) + k * T2 / r, x = cx + Math.cos(a) * R0, y = cy + Math.sin(a) * R0 * .45; c.fillStyle = p.accent; rrect(c, x - 9, y - 9, 18, 18, 4); c.fill(); } } } }; },
+  fabric(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.strokeStyle = rgba(p.accent, .3); c.lineWidth = 1;
+    for (let y = 0; y < h; y += 22) { c.beginPath(); for (let x = 0; x <= w; x += 10) { const yy = y + Math.sin(x * .01 + t + y * .02) * 12 * (x / w); x ? c.lineTo(x, yy) : c.moveTo(x, yy); } c.stroke(); }
+    for (let x = 0; x < w; x += 22) { c.beginPath(); for (let y = 0; y <= h; y += 10) { const xx = x + Math.cos(y * .012 + t * .8 + x * .01) * 12 * (x / w); y ? c.lineTo(xx, y) : c.moveTo(xx, y); } c.stroke(); } } }; },
+  popdots(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.fillStyle = p.accent;
+    for (let y = 10; y < h; y += 20) for (let x = 10; x < w; x += 20) { const r = Math.max(0, (Math.sin(x * .012 - t * 1.5) + Math.cos(y * .015 + t)) * 3.2 + 2) * (x / w); c.beginPath(); c.arc(x, y, r, 0, T2); c.fill(); } } }; },
+  equalizer(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const n = 48, bw = w * .62 / n;
+    for (let i = 0; i < n; i++) { const v = (noise(i * .2, t * .8) + .55) * h * .6; c.fillStyle = rgba(p.accent, .2 + i / n * .6); c.fillRect(w * .36 + i * bw, h - v, bw - 3, v); } } }; },
+  chart(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const k = (t * .15) % 1.3, n = 60;
+    c.strokeStyle = rgba(p.ink, .07); for (let y = h * .2; y < h; y += 60) { c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); }
+    const pt = i => [w * .2 + i / n * w * .8, h * .85 - (i / n) * h * .55 - noise(i * .25, 3) * 90];
+    c.beginPath(); const m = Math.min(n, Math.floor(k * n)); for (let i = 0; i <= m; i++) { const [x, y] = pt(i); i ? c.lineTo(x, y) : c.moveTo(x, y); }
+    c.strokeStyle = p.accent; c.lineWidth = 3; c.stroke(); const [x, y] = pt(m); c.lineTo(x, h); c.lineTo(w * .2, h); c.closePath(); c.fillStyle = rgba(p.accent, .1); c.fill();
+    c.fillStyle = p.accent; c.beginPath(); c.arc(x, y, 6, 0, T2); c.fill(); } }; },
+  stars(p) { const R = rnd(51); const s = Array.from({ length: 220 }, () => ({ x: R(), y: R(), r: R() * 1.6 + .3, f: R() * 6 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg);
+      for (const q of s) { c.fillStyle = rgba(p.accent, .25 + .75 * Math.abs(Math.sin(t * .8 + q.f))); c.beginPath(); c.arc(q.x * w, q.y * h, q.r, 0, T2); c.fill(); }
+      c.strokeStyle = rgba(p.accent, .25); c.beginPath(); for (let i = 0; i < 12; i++) { const q = s[i * 7]; i ? c.lineTo(q.x * w, q.y * h) : c.moveTo(q.x * w, q.y * h); } c.stroke(); } }; },
+  smoke(p) { const S = 8; let off = null;
+    return { fps: 30, draw(c, w, h, t) { const W = Math.ceil(w / S), H = Math.ceil(h / S); if (!off || off.width !== W) { off = document.createElement('canvas'); off.width = W; off.height = H; }
+      const x = off.getContext('2d'), im = x.createImageData(W, H), A = parseInt(p.accent.slice(1), 16), B = parseInt(p.bg.slice(1), 16);
+      for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) { const k = Math.max(0, Math.min(1, (fbm(i * .025 + t * .08, j * .03 - t * .05) + .3) * 1.2 * (i / W))), o = (j * W + i) * 4;
+        im.data[o] = lerp(B >> 16, A >> 16, k); im.data[o + 1] = lerp((B >> 8) & 255, (A >> 8) & 255, k); im.data[o + 2] = lerp(B & 255, A & 255, k); im.data[o + 3] = 255; }
+      x.putImageData(im, 0, 0); c.drawImage(off, 0, 0, w, h); } }; },
+  synth(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const hz = h * .62, cx = w * .7;
+    const g = c.createLinearGradient(0, hz - 220, 0, hz); g.addColorStop(0, p.accent); g.addColorStop(1, rgba(p.accent, .3)); c.fillStyle = g; c.beginPath(); c.arc(cx, hz, 200, Math.PI, 0); c.fill();
+    c.fillStyle = p.bg; for (let i = 0; i < 7; i++) c.fillRect(cx - 210, hz - 18 - i * 22, 420, 3 + i * .8);
+    c.strokeStyle = rgba(p.accent, .5); for (let i = 0; i < 16; i++) { const k = ((i + t * .8) % 16) / 16, y = hz + k * k * (h - hz); c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); }
+    for (let i = -14; i <= 14; i++) { c.beginPath(); c.moveTo(cx + i * 20, hz); c.lineTo(cx + i * 160, h); c.stroke(); } } }; },
+  cubes(p) { const R = rnd(54); const cs = Array.from({ length: 9 }, () => ({ x: .4 + R() * .55, y: .1 + R() * .8, s: 25 + R() * 45, r: R() * 6 }));
+    const V = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]], E = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.strokeStyle = p.accent; c.lineWidth = 1.6;
+      for (const q of cs) { const a = t * .5 + q.r, b = t * .3 + q.r; const P2 = V.map(([x, y, z]) => { let X = x * Math.cos(a) - z * Math.sin(a), Z = x * Math.sin(a) + z * Math.cos(a), Y = y * Math.cos(b) - Z * Math.sin(b); return [q.x * w + X * q.s, q.y * h + Y * q.s]; });
+        c.beginPath(); for (const [i, j] of E) { c.moveTo(...P2[i]); c.lineTo(...P2[j]); } c.stroke(); } } }; },
+  torus(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const cx = w * .7, cy = h * .5;
+    for (let i = 0; i < 60; i++) for (let j = 0; j < 24; j++) { const u = i / 60 * T2 + t * .2, v = j / 24 * T2; const x = (180 + 70 * Math.cos(v)) * Math.cos(u), y = (180 + 70 * Math.cos(v)) * Math.sin(u), z = 70 * Math.sin(v);
+      const a = t * .3, Y = y * Math.cos(a) - z * Math.sin(a), Z = y * Math.sin(a) + z * Math.cos(a), k = (Z + 250) / 500; c.fillStyle = rgba(p.accent, .1 + k * .8); c.fillRect(cx + x, cy + Y * .9, 2, 2); } } }; },
+  ridges(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.lineWidth = 1.5;
+    for (let r = 0; r < 34; r++) { const y0 = h * .15 + r * h * .022; c.beginPath();
+      for (let x = w * .35; x <= w * .95; x += 6) { const u = (x - w * .65) / (w * .3), peak = Math.exp(-u * u * 4) * Math.max(0, noise(x * .02, r * .3 + t * .2) + .3) * 90; const y = y0 - peak; x === w * .35 ? c.moveTo(x, y) : c.lineTo(x, y); }
+      c.lineTo(w * .95, h); c.lineTo(w * .35, h); c.closePath(); c.fillStyle = p.bg; c.fill(); c.strokeStyle = p.accent; c.stroke(); } } }; },
+  bubbles(p) { const R = rnd(57); const b = Array.from({ length: 70 }, () => ({ x: .35 + R() * .65, y: R(), r: 3 + R() * 18, s: .3 + R() }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); for (const q of b) { const y = (1 - ((q.y + t * .05 * q.s) % 1)) * (h + 40) - 20, x = q.x * w + Math.sin(t * 2 * q.s + q.r) * 8;
+      c.strokeStyle = rgba(p.accent, .55); c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, q.r, 0, T2); c.stroke(); c.fillStyle = rgba(p.accent, .12); c.fill(); } } }; },
+  mosaic(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const s = 36;
+    for (let y = 0; y < h; y += s) for (let x = w * .3 - (w * .3) % s; x < w; x += s) { const v = noise(x * .01 + t * .3, y * .01 - t * .2); if (v > .05) { c.fillStyle = rgba(p.accent, Math.min(.9, v * 2.4)); rrect(c, x + 3, y + 3, s - 6, s - 6, 5); c.fill(); } } } }; },
+  marquee(p) { const L = ['ЗАМОВЛЕННЯ', 'ОПЛАТА', 'НОВА ПОШТА', 'СКЛАД', 'CRM', 'ВІТРИНА'];
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.font = `800 ${h * .16}px system-ui, sans-serif`; c.textBaseline = 'middle'; c.lineWidth = 1.5;
+      for (let r = 0; r < 5; r++) { const str = (L.join('  ·  ') + '  ·  ').repeat(3), tw = c.measureText(L.join('  ·  ') + '  ·  ').width, dir = r % 2 ? 1 : -1;
+        const x = ((t * 40 * dir) % tw) - tw; c.strokeStyle = rgba(p.accent, r === 2 ? .7 : .25); c.strokeText(str, x, h * (.12 + r * .2)); } } }; },
+  ink(p) { let pts = []; return { trail: true, draw(c, w, h, t, m) { const x = m ? m.x : w * (.65 + .25 * Math.sin(t * .7)), y = m ? m.y : h * (.5 + .3 * Math.sin(t * 1.1));
+    pts.push({ x, y }); if (pts.length > 70) pts.shift(); clear(c, w, h, p.bg);
+    for (let i = 1; i < pts.length; i++) { c.strokeStyle = rgba(p.accent, i / pts.length); c.lineWidth = i / pts.length * 26; c.lineCap = 'round'; c.beginPath(); c.moveTo(pts[i - 1].x, pts[i - 1].y); c.lineTo(pts[i].x, pts[i].y); c.stroke(); } } }; },
+  kaleido(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const cx = w * .7, cy = h * .5;
+    for (let s = 0; s < 12; s++) { c.save(); c.translate(cx, cy); c.rotate(s * T2 / 12 + t * .05); if (s % 2) c.scale(1, -1);
+      for (let i = 0; i < 6; i++) { const r = 40 + i * 50 + Math.sin(t + i) * 20, a = .3 + Math.sin(t * .7 + i) * .2; c.fillStyle = rgba(p.accent, .12 + i * .04); c.beginPath(); c.ellipse(r, 0, 26 + i * 4, 10 + i * 2, a, 0, T2); c.fill(); } c.restore(); } } }; },
+  dunes(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg);
+    for (let l = 0; l < 7; l++) { c.beginPath(); c.moveTo(0, h); for (let x = 0; x <= w; x += 8) { const y = h * (.35 + l * .1) + Math.sin(x * .004 + l + t * .15 * (l % 2 ? 1 : -1)) * 40 + noise(x * .003, l) * 60; c.lineTo(x, y); }
+      c.lineTo(w, h); c.closePath(); c.fillStyle = mix(p.bg, p.accent, .15 + l * .12); c.fill(); } } }; },
+  tunnel(p) { return { draw(c, w, h, t) { clear(c, w, h, p.bg); const cx = w * .7, cy = h * .5; c.lineWidth = 1.5;
+    for (let i = 0; i < 18; i++) { const k = ((i + t * 1.2) % 18) / 18, s = Math.pow(k, 2.2) * Math.max(w, h) * 1.2; c.strokeStyle = rgba(p.accent, k); c.strokeRect(cx - s / 2, cy - s / 2 * .7, s, s * .7); }
+    c.strokeStyle = rgba(p.accent, .3); for (const [a, b] of [[-1,-1],[1,-1],[1,1],[-1,1]]) { c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + a * w, cy + b * w * .7); c.stroke(); } } }; },
+  sparks(p) { const R = rnd(64); let bolt = null, at = 0;
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg, .3); if (t - at > 1.6) { at = t; bolt = []; let x = w * (.45 + R() * .5), y = 0; while (y < h) { bolt.push([x, y]); x += (R() - .5) * 60; y += 20 + R() * 30; } }
+      if (bolt && t - at < .5) { const a = 1 - (t - at) / .5; c.strokeStyle = rgba(p.accent, a); c.lineWidth = 2.5; c.shadowColor = p.accent; c.shadowBlur = 20; c.beginPath(); bolt.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.stroke(); c.shadowBlur = 0; } } }; },
+  fireflies(p) { const R = rnd(65); const f = Array.from({ length: 60 }, () => ({ x: .3 + R() * .7, y: R(), s: R() * 9 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); for (const q of f) { const x = (q.x + noise(q.s, t * .1) * .2) * w, y = (q.y + noise(q.s + 9, t * .1) * .2) * h, a = (Math.sin(t * 1.5 + q.s * 3) + 1) / 2;
+      const g = c.createRadialGradient(x, y, 0, x, y, 18); g.addColorStop(0, rgba(p.accent, a)); g.addColorStop(1, rgba(p.accent, 0)); c.fillStyle = g; c.fillRect(x - 18, y - 18, 36, 36); } } }; },
+  planes(p) { const R = rnd(66); const pl = Array.from({ length: 10 }, () => ({ y: R(), s: .4 + R() * .6, o: R(), a: R() * .4 - .2 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); for (const q of pl) { const k = (q.o + t * .05 * q.s) % 1, x = -60 + k * (w + 120), y = q.y * h + Math.sin(k * 9) * 30;
+      c.strokeStyle = rgba(p.accent, .25); c.setLineDash([4, 6]); c.beginPath(); c.moveTo(x - 140, y + 20); c.quadraticCurveTo(x - 70, y - 10, x - 18, y); c.stroke(); c.setLineDash([]);
+      c.save(); c.translate(x, y); c.rotate(q.a); c.fillStyle = p.accent; c.beginPath(); c.moveTo(18, 0); c.lineTo(-14, -10); c.lineTo(-6, 0); c.lineTo(-14, 10); c.closePath(); c.fill(); c.restore(); } } }; },
+  coins(p) { const R = rnd(67); const cs = Array.from({ length: 40 }, () => ({ x: .35 + R() * .65, y: R(), s: .3 + R() * .7, r: 10 + R() * 12, ph: R() * 6 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); c.textAlign = 'center'; c.textBaseline = 'middle';
+      for (const q of cs) { const y = ((q.y + t * .06 * q.s) % 1) * (h + 60) - 30, x = q.x * w, sx = Math.abs(Math.cos(t * 2 * q.s + q.ph));
+        c.save(); c.translate(x, y); c.scale(sx, 1); c.fillStyle = p.accent; c.beginPath(); c.arc(0, 0, q.r, 0, T2); c.fill(); c.fillStyle = p.bg; c.font = `700 ${q.r}px system-ui`; c.fillText('₴', 0, 1); c.restore(); } } }; },
+  barcode(p) { const R = rnd(68); const bars = Array.from({ length: 6 }, () => Array.from({ length: 40 }, () => 1 + Math.floor(R() * 4)));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg);
+      bars.forEach((b, r) => { let x = w * .4; const y = h * (.1 + r * .14); b.forEach((bw, i) => { if (i % 2 === 0) { c.fillStyle = rgba(p.ink, .18); c.fillRect(x, y, bw * 2, h * .09); } x += bw * 2 + 1; }); });
+      const sy = h * (.5 + .45 * Math.sin(t * 1.2)); c.fillStyle = rgba(p.accent, .85); c.fillRect(w * .36, sy, w * .6, 2); const g = c.createLinearGradient(0, sy - 40, 0, sy); g.addColorStop(0, rgba(p.accent, 0)); g.addColorStop(1, rgba(p.accent, .18)); c.fillStyle = g; c.fillRect(w * .36, sy - 40, w * .6, 40); } }; },
+  heatmap(p) { const S = 10; let off = null;
+    return { fps: 30, draw(c, w, h, t) { const W = Math.ceil(w / S), H = Math.ceil(h / S); if (!off || off.width !== W) { off = document.createElement('canvas'); off.width = W; off.height = H; }
+      const x = off.getContext('2d'), im = x.createImageData(W, H), A = parseInt(p.accent.slice(1), 16), B = parseInt(p.bg.slice(1), 16);
+      for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) { let v = 0; for (let k = 0; k < 5; k++) { const bx = W * (.55 + .35 * Math.sin(t * .2 + k * 1.7)), by = H * (.5 + .4 * Math.cos(t * .17 + k * 2.3)); v += Math.exp(-((i - bx) ** 2 + (j - by) ** 2) / 120); }
+        const k = Math.min(1, v), o = (j * W + i) * 4; im.data[o] = lerp(B >> 16, A >> 16, k); im.data[o + 1] = lerp((B >> 8) & 255, (A >> 8) & 255, k); im.data[o + 2] = lerp(B & 255, A & 255, k); im.data[o + 3] = 255; }
+      x.putImageData(im, 0, 0); c.drawImage(off, 0, 0, w, h); } }; },
+  ripples(p) { const R = rnd(70); let drops = [];
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); if (R() < .04) drops.push({ x: (.35 + R() * .65) * w, y: R() * h, t0: t }); drops = drops.filter(d => t - d.t0 < 4);
+      for (const d of drops) for (let i = 0; i < 3; i++) { const k = (t - d.t0) / 4, r = k * 220 - i * 18; if (r > 0) { c.strokeStyle = rgba(p.accent, (1 - k) * .6); c.lineWidth = 1.5; c.beginPath(); c.ellipse(d.x, d.y, r, r * .5, 0, 0, T2); c.stroke(); } } } }; },
+  traffic(p) { const R = rnd(71); const lanes = Array.from({ length: 14 }, () => ({ s: .5 + R() * 1.5, o: R() * 100, d: R() < .5 ? 1 : -1 }));
+    return { draw(c, w, h, t) { clear(c, w, h, p.bg); lanes.forEach((l, i) => { const y = h * (.08 + i * .065);
+      c.strokeStyle = rgba(p.ink, .06); c.beginPath(); c.moveTo(w * .3, y); c.lineTo(w, y); c.stroke();
+      for (let k = 0; k < 8; k++) { const x = w * .3 + (((k * 160 + l.o + t * 80 * l.s * l.d) % (w * .7 + 160)) + w * .7 + 160) % (w * .7 + 160) - 80; c.fillStyle = rgba(p.accent, .3 + (k % 3) * .25); rrect(c, x, y - 3, 30 + (k % 2) * 30, 6, 3); c.fill(); } }); } }; },
+});
